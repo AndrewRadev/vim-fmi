@@ -41,4 +41,30 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
     :validatable, :confirmable, :lockable, :trackable
+
+  scope :admins,   -> { where(admin: true) }
+  scope :students, -> { where(admin: false) }
+
+  has_many :solutions
+
+  mount_uploader :photo, PhotoUploader
+
+  validates :password, confirmation: true, unless: -> { password.blank? }
+
+  class << self
+    def sorted
+      order(Arel.sql(<<~END))
+        (CASE
+          WHEN photo = '' THEN 1
+          WHEN photo IS NULL THEN 1
+          ELSE 0
+        END) ASC,
+        created_at ASC
+      END
+    end
+
+    def at_page(page_number)
+      paginate page: page_number, per_page: 20
+    end
+  end
 end

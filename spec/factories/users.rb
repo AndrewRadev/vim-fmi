@@ -5,5 +5,9 @@ FactoryBot.define do
     full_name { "Student User" }
     name { "Student" }
     faculty_number { |n| n.to_s.rjust(5, '0') }
+
+    trait :with_photo do
+      photo { Rack::Test::UploadedFile.new Rails.root.join('spec/fixtures/files/mind_flayer.jpg') }
+    end
   end
 end

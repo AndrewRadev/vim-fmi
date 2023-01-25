@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 ruby '3.2.0'
 
@@ -24,6 +23,8 @@ gem 'bootsnap', require: false
 
 gem 'devise'
 gem 'rails-i18n'
+gem 'carrierwave'
+gem 'will_paginate'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
