@@ -3,6 +3,7 @@
   "private": "true",
   "dependencies": {
     "esbuild": "^0.17.4",
+    "jquery": "^3.6.3",
     "sass": "^1.57.1"
   },
   "scripts": {

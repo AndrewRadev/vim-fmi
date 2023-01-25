@@ -1,0 +1,53 @@
+.code {
+  position: relative;
+  border-radius: 4px;
+  border: 1px solid $light-border;
+
+  .line { float: none; }
+
+  .highlighter { border: none; padding: 0; white-space: normal; }
+  .highlighter .line { display: inline; float: none; width: auto; }
+  .highlighter .pre { padding-left: 5px; width: 100%; }
+
+  .highlight,
+  .line-numbers {
+    font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+    font-size: 13px;
+  }
+
+  .highlight { white-space: pre-wrap; word-break: break-all; }
+
+  .code-line.removed { background: rgba(240, 0, 0, 0.08); }
+  .code-line.added   { background: rgba(0, 240, 0, 0.08); }
+
+  .code-line {
+    display: table;
+
+    .line-numbers {
+      // Inserting the numbers this way prevents selecting and copying them with the code
+      &::before { content: attr(data-line-number); }
+
+      @include no-selection;
+
+      background-color: $gray;
+      color: #aaa;
+      display: table-cell;
+      min-width: 45px;
+      padding-right: 10px;
+      text-align: right;
+    }
+
+    .pre { display: table-cell; }
+  }
+
+  .copy-button {
+    display: none;
+    @include copy-button;
+  }
+
+  &:hover {
+    .copy-button {
+      display: block;
+    }
+  }
+}

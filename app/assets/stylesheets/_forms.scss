@@ -1,0 +1,75 @@
+.simple_form {
+  > div, fieldset > div { margin: $margin 0; }
+
+  legend { color: $subtitle-color; font-size: $font-large; font-weight: bold; padding: 10px 0; }
+
+  label { display: block; padding: 0 0 5px 0; }
+  label abbr { display: none; }
+
+  .boolean label { display: inline; }
+
+  input.string,
+  input.password { border: 1px solid $dark-border; font-size: $font-large; padding: 5px; margin: 2px 0; }
+  textarea { border: 1px solid $dark-border; font-size: $font-normal; padding: 5px; margin: 2px 0; width: 100%; height: 200px; }
+
+  input.string,
+  input.password { width: 280px; }
+
+  div.input { margin: 1em 0; }
+
+  .input.radio_buttons,
+  .input.check_boxes {
+    span { display: inline-block; }
+    span label { display: inline-block; margin: 0 3ex 0 1ex; }
+  }
+
+  .error,
+  .hint { line-height: 35px; margin-left: 10px; vertical-align: top; }
+
+  .hint { color: $hint; font-style: italic; }
+
+  .error_notification { background-color: $alert; color: $background; padding: 10px 20px; }
+
+  .field_with_errors {
+    input.string,
+    input.password,
+    textarea { border-color: $alert; }
+
+    .error { color: $alert; }
+    .hint { display: none; }
+  }
+
+  .text {
+    .error { display: block; }
+  }
+
+  input[name*=faculty_number] { width: 80px; }
+  textarea[name*=body] { width: 100%; height: 200px; }
+
+  @include mobile-only {
+    input.string,
+    input.password,
+    input[type=submit] { width: 100%; }
+  }
+
+  input[type=button] { @include button; }
+  input[type=submit] { @include primary-button; }
+
+  .contribution-preview {
+    @include markdown;
+    @include content;
+
+    &:empty {
+      display: none;
+    }
+
+    p:first-child { margin-top: 0; }
+    p:last-child { margin-bottom: 0; }
+
+    margin-top: 5px;
+    padding: 20px;
+    border: 1px solid #dfdfdf;
+    overflow: hidden;
+  }
+}
+

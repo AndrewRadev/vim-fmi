@@ -1,16 +1,80 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VimFmi</title>
+    <title>Vim @ FMI</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="mobile-menu">
+      <div class="logo">
+        <%= link_to image_tag("logo.png"), root_path, class: 'logo' %>
+      </div>
+
+      <%= render 'layouts/menu', mobile: true %>
+    </nav>
+
+    <div class="site-content-overlay js-site-content-overlay">
+    </div>
+
+    <div class="site-content">
+      <header class="site-header">
+        <button class="site-menu-button" data-toggle-mobile-menu>
+          ≡
+        </button>
+
+        <%= link_to image_tag("logo.png"), root_path, class: 'logo' %>
+
+        <h1>Употреба и скриптиране на Vim</h1>
+
+        <h2>
+          Курс във Факултета по Математика и Информатика към
+          <abbr title="Софийски Университет">СУ</abbr>
+        </h2>
+
+        <nav>
+          <ul>
+            <% if user_signed_in? %>
+              <li>Здрасти, <%= link_to current_user.name, edit_profile_path %></li>
+              <li><%= link_to 'Изход', destroy_user_session_path, data: { :method => :delete } %></li>
+            <% else %>
+              <li><%= link_to 'Вход', new_user_session_path %>
+              <li><%= link_to 'Регистрация', new_user_registration_path %>
+            <% end %>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="site-columns">
+        <nav class="site-menu">
+          <%= render 'layouts/menu', mobile: false %>
+        </nav>
+
+        <div id="container">
+          <% flash.keys.each do |key| %>
+            <div class="flash <%= key %>">
+              <%= flash[key] %>
+            </div>
+          <% end %>
+
+          <div class="main">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        Някои права запазени
+      </footer>
+    </div>
+
+    <%= render 'common/copy_buttons' %>
   </body>
 </html>

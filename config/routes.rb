@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :users, only: %w(index show)
+  resource :team, only: :show
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :announcements, except: %w(destroy)
+  resources :lectures, only: :index
+
+  resources :tasks, except: :destroy do
+    # resources :solutions, only: %w(index show update) do
+    #   get :unscored, on: :collection
+    # end
+    # resource :my_solution, only: %w(show update)
+    # resource :check, controller: :task_checks, only: :create
+  end
+
+  root "home#index"
 end
