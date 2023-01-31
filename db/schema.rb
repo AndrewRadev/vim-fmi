@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_144901) do
     t.boolean "admin", default: false, null: false
     t.boolean "comment_notification", default: true, null: false
     t.string "photo"
+    t.string "github"
     t.string "discord"
     t.text "about"
     t.datetime "created_at", null: false

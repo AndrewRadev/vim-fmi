@@ -23,6 +23,8 @@ module VimFmi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    config.i18n.default_locale = :bg
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -33,5 +35,9 @@ module VimFmi
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Site config:
+    config.course_name = 'Употреба и скриптиране на Vim'
+    config.course_email = 'team@vim-fmi.bg'
   end
 end

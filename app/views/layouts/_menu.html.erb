@@ -27,6 +27,6 @@
   <% end %>
 
   <% if mobile and user_signed_in? %>
-    <li><%= link_to 'Изход', destroy_user_session_path %></li>
+    <li><%= link_to 'Изход', destroy_user_session_path, method: :delete %></li>
   <% end %>
 </ul>

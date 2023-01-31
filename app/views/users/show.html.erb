@@ -1,0 +1,47 @@
+<div id="user-page">
+  <h1><%= @user.name %></h1>
+
+  <% if admin? or @user == current_user %>
+    <p class="faculty-number"><%= "(№#{@user.faculty_number})" %></p>
+  <% end %>
+
+  <%= user_thumbnail @user %>
+
+  <dl>
+    <% if @user.github.present? %>
+      <dt>GitHub</dt>
+      <dd><%= link_to @user.github, "http://github.com/#{@user.github}" %></dd>
+    <% end %>
+
+    <% if logged_in? and @user.discord.present? %>
+      <dt>Discord</dt>
+      <dd><%= @user.discord %></dd>
+    <% end %>
+
+    <% if admin? %>
+      <dt>Поща</dt>
+      <dd><%= @user.email %></dd>
+    <% end %>
+
+    <% if logged_in? && @user.about.present? %>
+      <dt>За вас</dt>
+      <dd><%= @user.about %></dd>
+    <% end %>
+
+    <% if admin? %>
+      <dt>Точки</dt>
+      <dd><%= @user.points %></dd>
+    <% end %>
+  </dl>
+
+  <% if logged_in? && @user == current_user %>
+    <p>
+      <%= link_to 'Редактирай', edit_profile_path, class: :action %>
+    </p>
+  <% end %>
+
+  <section class="tasks">
+    <h2>Домашни</h2>
+    TODO
+  </section>
+</div>

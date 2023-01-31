@@ -39,6 +39,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.boolean :admin, null: false, default: false
       t.boolean :comment_notification, null: false, default: true
       t.string :photo
+      t.string :github
       t.string :discord
       t.text :about
 

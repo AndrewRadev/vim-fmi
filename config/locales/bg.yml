@@ -1,3 +1,195 @@
-en:
+bg:
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
   errors:
-    faculty_number_taken_by_user: 'е зает от съществуващ потребител'
+    messages:
+      blank: задължително поле
+      confirmation: не съвпада
+      taken: e заето
+      not_a_number: трябва да е число
+      presence: задължително поле
+  simple_form:
+    error_notification:
+      default_message: 'Намерихме няколко грешки. Погледнете и пробвайте пак:'
+      registration: Регистрацията ви беше неуспешна. Сигурни ли сте, че въведохте правилните данни?
+    hints:
+      user:
+        github: Ако нямате, крайно време е да си направите
+        discord: Името, което ползвате в канала на курса
+        phone: Не е публичен; ползваме го само в краен случай
+        site: Ако имате такъв; не забравяйте да укажете протокол (например http://)
+        about: Ако искате
+  helpers:
+    submit:
+      reply:
+        create: Отговори
+        update: Обнови
+      announcement:
+        create: Публикувай
+        update: Запази
+      task:
+        create: Създай
+        update: Запази
+      attribution:
+        create: Признай
+        update: Запази
+  devise:
+    failure:
+      invalid: Невалидна е-поща или парола.
+      already_authenticated: Не може да искате нова парола докато сте логнати.
+      unauthenticated: 'You need to sign in or sign up before continuing.'
+      unconfirmed: 'You have to confirm your account before continuing.'
+      invalid_token: 'Invalid authentication token.'
+      timeout: 'Your session expired, please sign in again to continue.'
+      inactive: 'Your account was not activated yet.'
+      user:
+        not_found_in_database: Няма такъв потребител.
+    sessions:
+      signed_in: Влязохте успешно.
+      signed_out: Излязохте успешно от системата.
+    passwords:
+      user:
+        send_instructions: Изпратихме ви инструкции. Проверете си пощата.
+        updated: Паролата е сменена.
+  activemodel:
+    attributes:
+      registration:
+        full_name: Трите имена
+        faculty_number: Факултетен номер
+        email: Електронна поща
+      activation:
+        password: Парола
+        password_confirmation: Въведете паролата повторно
+      challenge_submission:
+        code: Код
+  activerecord:
+    attributes:
+      user:
+        email: Електронна поща
+        password: Парола
+        password_confirmation: Въведете паролата повторно
+        remember_me: Запомни ме на този компютър
+        photo: Снимка
+        github: Потребителско име в GitHub
+        phone: Мобилен телефон
+        site: Сайт
+        about: Разкажете ни за себе си
+        comment_notification: Искам да получавам писма за коментари по решенията ми
+      sign_up:
+        full_name: Три имена
+        faculty_number: Факултетен номер
+      topic:
+        title: Заглавие
+        body: Съдържание
+      reply:
+        body: Отговор
+      announcement:
+        title: Заглавие
+        body: Тяло
+      task:
+        name: Име
+        description: Условие
+        manually_scored: Ръчно оценяване
+        checked: Проверена
+        hidden: Скрита
+        test_case: Тест
+        basic_test_case: Базов тест
+        closes_at: Краен срок
+      solution:
+        adjustment: Корекция
+        points: Точки
+      comment:
+        body: Коментар
+      poll:
+        name: Име
+        blueprint_yaml: YAML
+      challenge:
+        name: Име
+        closes_at: Краен срок
+        checked: Проверено
+        hidden: Скрито
+        description: Описание
+        test_case: Тест
+      tip:
+        title: Заглавие
+        body: Тяло
+      attribution:
+        reason: Причина
+        link: Връзка
+    errors:
+      models:
+        attribution:
+          attributes:
+            link:
+              invalid: не изглежда като URL адрес
+        user:
+          attributes:
+            email:
+              not_found: не съществува в нашата потребителска база
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "по-малко от минута"
+      less_than_x_seconds:
+        one: "по-малко от %{count} секунди"
+        few: "по-малко от %{count} секунди"
+        many: "по-малко от %{count} секунди"
+        other: "по-малко от %{count} секунди"
+      x_seconds:
+        one: "%{count} секунда"
+        few: "%{count} секунди"
+        many: "%{count} секунди"
+        other: "%{count} секунди"
+      less_than_x_minutes:
+        one: "по-малко от %{count} минута"
+        few: "по-малко от %{count} минути"
+        many: "по-малко от %{count} минути"
+        other: "по-малко от %{count} минути"
+      x_minutes:
+        one: "%{count} минута"
+        few: "%{count} минути"
+        many: "%{count} минути"
+        other: "%{count} минути"
+      about_x_hours:
+        one: "около %{count} час"
+        few: "около %{count} часа"
+        many: "около %{count} часа"
+        other: "около %{count} часа"
+      x_days:
+        one: "%{count} ден"
+        few: "%{count} дни"
+        many: "%{count} дни"
+        other: "%{count} дена"
+      about_x_months:
+        one: "около %{count} месеца"
+        few: "около %{count} месеца"
+        many: "около %{count} месеца"
+        other: "около %{count} месеца"
+      x_months:
+        one: "%{count} месец"
+        few: "%{count} месеца"
+        many: "%{count} месеци"
+        other: "%{count} месеца"
+      almost_x_years:
+        one: "почти %{count} година"
+        few: "почти %{count} години"
+        many: "почти %{count} години"
+        other: "почти %{count} години"
+      about_x_years:
+        one: "около %{count} година"
+        few: "около %{count} години"
+        many: "около %{count} години"
+        other: "около %{count} години"
+      over_x_years:
+        one: "над %{count} година"
+        few: "над %{count} години"
+        many: "над %{count} години"
+        other: "над %{count} години"
+    prompts:
+      year: "Година"
+      month: "Месец"
+      day: "Ден"
+      hour: "Часа"
+      minute: "Минути"
+      second: "Секунди"

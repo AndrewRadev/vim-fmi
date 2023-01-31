@@ -1,0 +1,14 @@
+<h1>Вход</h1>
+
+<p>
+  За да влезете в системата, трябва първо да сте се <%= link_to('регистрирали', new_user_registration_path) %>.
+</p>
+
+<%= simple_form_for resource, as: resource_name, url: session_path(resource_name) do |form| %>
+  <%= form.input :email %>
+  <%= form.input :password %>
+  <%= form.input :remember_me, as: :boolean %>
+  <%= form.submit "Влез" %>
+  <%= link_to 'Забравена парола', new_user_password_path, class: 'forgotten-password' %>
+<% end %>
+

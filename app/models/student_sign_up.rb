@@ -45,7 +45,7 @@ class StudentSignUp < ApplicationRecord
 
   def faculty_number_must_be_unique_across_users_too
     if User.exists? faculty_number: faculty_number
-      errors.add :faculty_number, I18n.t('errors.faculty_number_taken_by_user')
+      errors.add :faculty_number, 'Вече има потребител с този факултетен номер'
     end
   end
 

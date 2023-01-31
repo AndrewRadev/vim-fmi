@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :users, only: %w(index show)
   resource :team, only: :show
 
+  resource :dashboard, only: :show
+  resource :profile, only: %w(edit update)
+
   resources :announcements, except: %w(destroy)
   resources :lectures, only: :index
 
@@ -13,6 +16,8 @@ Rails.application.routes.draw do
     # resource :my_solution, only: %w(show update)
     # resource :check, controller: :task_checks, only: :create
   end
+
+  resources :voucher_claims, only: %w(new create)
 
   root "home#index"
 end

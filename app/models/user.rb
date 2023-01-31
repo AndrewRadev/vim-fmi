@@ -17,6 +17,7 @@
 #  faculty_number         :string           not null
 #  failed_attempts        :integer          default(0), not null
 #  full_name              :string           not null
+#  github                 :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime

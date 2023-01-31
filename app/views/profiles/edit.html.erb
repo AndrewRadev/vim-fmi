@@ -1,0 +1,51 @@
+<h1>Редакция на профил</h1>
+
+<p>
+  <%= link_to 'Вижте публичния си профил &rarr;'.html_safe, user_path(current_user) %>
+</p>
+
+<%= simple_form_for @user, url: profile_path, html: {method: :put, multipart: true} do |form| %>
+  <fieldset>
+    <legend>Снимка</legend>
+
+    <p>
+      Много ще се радваме да можем да свържем лицата ви със anime и game героите, които имате в Discord.
+      Ако ще качвате снимка, нека да бъде <strong>истинска и да се разпознавате ясно на нея.</strong>
+      Ще махаме останалите.
+    </p>
+
+    <%= user_thumbnail @user %>
+
+    <% if @user.photo.present? %>
+      <%= form.input :remove_photo, as: :boolean, label: 'Изтрий снимката' %>
+      <p>Или качи друга:</p>
+      <p><%= form.file_field :photo %></p>
+    <% else %>
+      <p>Качи снимка:</p>
+      <p><%= form.file_field :photo %></p>
+    <% end %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Малко лична информация за вас</legend>
+
+    <%= form.input :github %>
+    <%= form.input :discord %>
+    <%= form.input :about, input_html: {size: '50x5'} %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Известия по поща</legend>
+    <%= form.input :comment_notification %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Промяна на парола</legend>
+    <p>Ако не искате да променяте паролата си, оставете долните полета празни:</p>
+
+    <%= form.input :password, input_html: { autocomplete: 'off' } %>
+    <%= form.input :password_confirmation %>
+  </fieldset>
+
+  <%= form.button :submit, 'Запази' %>
+<% end %>
