@@ -5,7 +5,8 @@
     "@rails/ujs": "^7.0.4-2",
     "esbuild": "^0.17.4",
     "jquery": "^3.6.3",
-    "sass": "^1.57.1"
+    "sass": "^1.57.1",
+    "underscore": "^1.13.6"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",

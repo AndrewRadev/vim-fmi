@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users, only: %w(index show)
+  resources :sign_ups, only: %w(index create)
   resource :team, only: :show
 
   resource :dashboard, only: :show
@@ -17,7 +18,13 @@ Rails.application.routes.draw do
     # resource :check, controller: :task_checks, only: :create
   end
 
+  resources :activities, only: :index
+  resources :points_breakdowns, only: :index
+
   resources :voucher_claims, only: %w(new create)
+  resources :vouchers, only: %w(index new create)
+
+  resource :preview, only: :create
 
   root "home#index"
 end

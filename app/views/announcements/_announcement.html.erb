@@ -1,0 +1,22 @@
+<% single_announcement ||= false %>
+
+<article class="announcement">
+  <% if single_announcement %>
+    <h1><%= announcement.title %></h1>
+  <% else %>
+    <h2><%= link_to announcement.title, announcement %></h2>
+  <% end %>
+
+  <div class="published-at">
+    Публикувано на
+    <time datetime="<%= announcement.created_at.iso8601 %>" pubdate="pubdate">
+      <%= l announcement.created_at %>
+    </time>
+  </div>
+
+  <%= markup announcement.body %>
+
+  <% admin_only do %>
+    <%= link_to 'Редактирай', edit_announcement_path(announcement), class: :action %>
+  <% end %>
+</article>

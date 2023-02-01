@@ -1,0 +1,6 @@
+<%= simple_form_for announcement do |form| %>
+  <%= form.input :title %>
+  <%= form.input :body, as: :markdown %>
+  <%= form.button :submit %>
+<% end %>
+

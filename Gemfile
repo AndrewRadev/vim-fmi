@@ -24,6 +24,9 @@ gem 'rails-i18n'
 gem 'carrierwave'
 gem 'will_paginate'
 gem 'simple_form'
+gem 'rdiscount'
+gem 'sanitize'
+gem 'rails_autolink'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

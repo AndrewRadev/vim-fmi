@@ -1,0 +1,17 @@
+<div id="announcements">
+  <h1>Новини</h1>
+
+  <% if admin? %>
+    <%= link_to 'Нова', new_announcement_path, class: [:action, :primary] %>
+  <% end %>
+
+  <% unless @announcements.empty? %>
+    <% @announcements.each do |announcement| %>
+      <%= render announcement %>
+    <% end %>
+  <% else %>
+    <p class="no-records">Все още няма новини</p>
+  <% end %>
+</div>
+
+<%= will_paginate @announcements %>
