@@ -1,0 +1,33 @@
+<h1>Ваучъри</h1>
+
+<%= link_to "Добави нови", new_voucher_path, class: [:action, :primary] %>
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Код</th>
+      <th>Потребител</th>
+      <th>Взет на</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vouchers.each do |voucher| %>
+      <tr>
+        <td><%= voucher.code %></td>
+        <% if voucher.user %>
+          <td><%= link_to voucher.user.name, voucher.user %></td>
+          <td>
+            <time datetime="<%= voucher.claimed_at.iso8601 %>">
+              преди
+              <%= time_ago_in_words voucher.claimed_at %>
+            </time>
+          </td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

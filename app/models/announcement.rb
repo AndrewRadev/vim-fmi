@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: announcements
+#
+#  id         :bigint           not null, primary key
+#  body       :text
+#  title      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Announcement < ApplicationRecord
   self.per_page = 10
 
