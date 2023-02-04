@@ -33,6 +33,6 @@
 
   a[data-toggle-star=star],
   a[data-toggle-star=unstar] { background: { position: top left; repeat: no-repeat; }; padding-left: 20px; }
-  a[data-toggle-star=star]   { background-image: image-url('icons/star.png'); }
-  a[data-toggle-star=unstar] { background-image: image-url('icons/unstar.png'); }
+  a[data-toggle-star=star]   { background-image: url('icons/star.png'); }
+  a[data-toggle-star=unstar] { background-image: url('icons/unstar.png'); }
 }
