@@ -1,0 +1,27 @@
+<h1>Материали</h1>
+
+<div id="lectures">
+  <% unless @lectures.nil? %>
+    <table>
+      <thead>
+        <tr>
+          <th class="number">#</th>
+          <th class="name">Лекция</th>
+          <th class="date">Дата</th>
+          <th class="video">Видео</th>
+        </tr>
+      </thead>
+
+      <% @lectures.each.with_index do |lecture, index| %>
+        <tr>
+          <td class="number"><%= index %></td>
+          <td class="name"><%= link_to lecture_title(lecture), lecture_url(lecture) %></td>
+          <td class="date"><%= lecture[:date] %></td>
+          <td class="video"><%= lecture_video_links(lecture) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p class="missing">Няма качени лекции</p>
+  <% end %>
+</div>
