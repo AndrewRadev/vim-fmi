@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_212226) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "student_sign_ups", force: :cascade do |t|
+  create_table "sign_ups", force: :cascade do |t|
     t.string "full_name"
     t.string "faculty_number"
     t.string "email"
