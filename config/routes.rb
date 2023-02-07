@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   resources :lectures, only: :index
 
   resources :tasks, except: :destroy do
-    # resources :solutions, only: %w(index show update) do
-    #   get :unscored, on: :collection
-    # end
-    # resource :my_solution, only: %w(show update)
+    resources :solutions, only: %w(index show update) do
+      get :unscored, on: :collection
+    end
+    resource :my_solution, only: %w(show)
     # resource :check, controller: :task_checks, only: :create
   end
 

@@ -1,0 +1,10 @@
+<div class="code">
+  <% code.lines.each_with_index do |line, index| %>
+    <div class="line" data-line-number="<%= index + 1 %>">
+      <div class="code-line">
+        <span class="line-numbers" data-line-number="<%= index + 1 %>"></span>
+        <span class="pre highlight"><%= line %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

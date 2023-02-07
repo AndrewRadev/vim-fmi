@@ -88,14 +88,13 @@ bg:
         title: Заглавие
         body: Тяло
       task:
-        name: Име
-        description: Условие
-        manually_scored: Ръчно оценяване
+        description: Описание
         checked: Проверена
         hidden: Скрита
-        test_case: Тест
-        basic_test_case: Базов тест
-        closes_at: Краен срок
+        input: Вход
+        output: Изход
+        opens_at: Начало
+        closes_at: Край
       solution:
         adjustment: Корекция
         points: Точки
@@ -104,13 +103,6 @@ bg:
       poll:
         name: Име
         blueprint_yaml: YAML
-      challenge:
-        name: Име
-        closes_at: Краен срок
-        checked: Проверено
-        hidden: Скрито
-        description: Описание
-        test_case: Тест
       tip:
         title: Заглавие
         body: Тяло

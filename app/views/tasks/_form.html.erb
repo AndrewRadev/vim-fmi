@@ -1,0 +1,10 @@
+<%= simple_form_for task do |form| %>
+  <%= form.input :opens_at, as: :date_time %>
+  <%= form.input :closes_at, as: :date_time %>
+  <%= form.input :input %>
+  <%= form.input :output %>
+  <%= form.input :description %>
+  <%= form.input :points %>
+  <%= form.submit %>
+<% end %>
+

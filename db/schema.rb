@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_04_212226) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_150938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_212226) do
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "description"
+    t.text "input", null: false
+    t.text "output", null: false
+    t.datetime "opens_at", precision: nil
+    t.datetime "closes_at", precision: nil
+    t.integer "points", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["closes_at"], name: "index_tasks_on_closes_at"
   end
 
   create_table "users", force: :cascade do |t|

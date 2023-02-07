@@ -1,0 +1,45 @@
+<div class="task">
+  <h1><%= @task.label %></h1>
+
+  <p>
+    <%= admin_only do %>
+      <%= link_to 'Редактирай', edit_task_path(@task), class: :action %>
+    <% end %>
+
+    <%= authenticated_only do %>
+      <%= link_to 'Предай решение', task_my_solution_path(@task), class: [:action, :primary] %>
+
+      <% if @current_user_solution %>
+        <%= link_to 'Коментари към моето решение', @current_user_solution, class: [:action, :primary] %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <% if admin? or @task.closed? %>
+    <p><%= link_to 'Предадени решения', task_solutions_path(@task) %></p>
+  <% end %>
+
+  <% if @task.closed? %>
+    <p class="closed">Срокът за предаване на решения е отминал</p>
+  <% end %>
+
+  <dl>
+    <dt>Краен срок:</dt>
+    <dd><%= l @task.closes_at %></dd>
+
+    <dt>Точки:</dt>
+    <dd><%= @task.points %></dd>
+  </dl>
+
+  <p>
+    <h3>Начално състояние</h3>
+    <%= render 'shared/code', code: @task.input %>
+
+    <h3>Крайно състояние</h3>
+    <%= render 'shared/code', code: @task.output %>
+
+    <% if @task.description? %>
+      <p><%= @task.description %></p>
+    <% end %>
+  </p>
+</div>

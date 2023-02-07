@@ -1,0 +1,25 @@
+<div id="tasks">
+  <h1>Задачи</h1>
+
+  <%= admin_only do %>
+    <%= link_to 'Нова задача', new_task_path, class: [:action, :primary] %>
+  <% end %>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="name">Име</th>
+        <th class="closes_at">Краен срок</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr class="<%= task_row_class(task) %>">
+          <td class="name"><%= link_to task.label, task %></td>
+          <td class="closes_at"><%= l task.closes_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

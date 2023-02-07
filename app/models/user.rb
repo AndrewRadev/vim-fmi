@@ -41,7 +41,7 @@
 #
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-    :validatable, :confirmable, :lockable, :trackable
+    :validatable, :lockable, :trackable
 
   scope :admins,   -> { where(admin: true) }
   scope :students, -> { where(admin: false) }
