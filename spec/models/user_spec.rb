@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe User do
+  it "can shorten the name of a user" do
+    expect(User.shorten_name('Петър Иванов')).to eq 'Петър Иванов'
+    expect(User.shorten_name('Петър Петров Иванов')).to eq 'Петър Иванов'
+    expect(User.shorten_name('Петър Петров Петров Иванов')).to eq 'Петър Иванов'
+  end
+
   describe "sorting" do
     it "sorts by creation time, older users first" do
       second = create :user, created_at: 2.days.ago

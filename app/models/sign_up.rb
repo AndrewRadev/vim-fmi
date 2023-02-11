@@ -18,7 +18,7 @@ class SignUp < ApplicationRecord
   class << self
     def with_token(token)
       return nil if token.blank?
-      find_by_token(token)
+      find_by(token: token)
     end
 
     def next_fake_faculty_number

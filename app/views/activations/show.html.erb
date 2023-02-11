@@ -1,0 +1,12 @@
+<h1>Изберете си парола...</h1>
+
+<p>Почти сте се готови, остава само да си изберете парола</p>
+
+<%= simple_form_for @activation, as: :activation do |form| %>
+  <%= form.error_notification %>
+  <%= form.input :password %>
+  <%= form.input :password_confirmation %>
+
+  <%= form.submit 'Регистрирай ме' %>
+<% end %>
+

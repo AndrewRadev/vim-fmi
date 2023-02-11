@@ -5,7 +5,7 @@
 
   <% if mobile and not user_signed_in? %>
     <li><%= link_to 'Вход', new_user_session_path %></li>
-    <li><%= link_to 'Регистрация', new_user_registration_path %></li>
+    <li><%= link_to 'Регистрация', new_registration_path %></li>
   <% end %>
 
   <% if user_signed_in? %>

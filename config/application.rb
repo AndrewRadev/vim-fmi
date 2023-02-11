@@ -38,6 +38,7 @@ module VimFmi
     config.generators.system_tests = nil
 
     # Site config:
+    config.short_course_name = 'Vim @ FMI'
     config.course_name = 'Употреба и скриптиране на Vim'
     config.course_email = 'team@vim-fmi.bg'
   end

@@ -1,0 +1,35 @@
+<h1>Записване на студенти</h1>
+
+<%= simple_form_for @sign_up || SignUp.new do |form| %>
+  <fieldset>
+    <legend>Запиши нов студент</legend>
+
+    <%= form.error_notification %>
+    <%= form.input :full_name %>
+    <%= form.input :faculty_number, hint: "#{SignUp.next_fake_faculty_number} за човек извън ФМИ" %>
+    <%= form.submit 'Запиши' %>
+  </fieldset>
+<% end %>
+
+<table class="data-table">
+  <caption>Записани студенти</caption>
+  <thead>
+    <tr>
+      <th>Име</th>
+      <th>Факултетен номер</th>
+      <th>Поща</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sign_ups.each do |sign_up| %>
+      <tr>
+        <td><%= sign_up.full_name %></td>
+        <td><%= sign_up.faculty_number %></td>
+        <td>
+          <%= link_to sign_up.email, activation_path(sign_up.token) if sign_up.email? %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

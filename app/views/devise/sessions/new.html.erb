@@ -1,7 +1,7 @@
 <h1>Вход</h1>
 
 <p>
-  За да влезете в системата, трябва първо да сте се <%= link_to('регистрирали', new_user_registration_path) %>.
+  За да влезете в системата, трябва първо да сте се <%= link_to('регистрирали', new_registration_path) %>.
 </p>
 
 <%= simple_form_for resource, as: resource_name, url: session_path(resource_name) do |form| %>

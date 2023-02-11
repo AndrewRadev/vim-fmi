@@ -1,25 +1,11 @@
-<h2>Change your password</h2>
+<h1>Сменете си паролата</h1>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :put}) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :reset_password_token, as: :hidden %>
+  <%= f.full_error :reset_password_token %>
+  <%= f.input :password, required: true, autofocus: true %>
+  <%= f.input :password_confirmation %>
+  <%= f.button :submit, 'Смени' %>
 <% end %>
 
-<%= render "devise/shared/links" %>

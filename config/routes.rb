@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :registration, only: %w(new create)
+  resources :activations, constraints: {id: /.+/}, only: %w(show update)
   devise_for :users
   resources :users, only: %w(index show)
   resources :sign_ups, only: %w(index create)
