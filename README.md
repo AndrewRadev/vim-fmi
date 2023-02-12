@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is the website for the Vim course at Sofia University: <https://vim-fmi.bg>. It's all in Bulgarian, so it's probably a bit of a niche setup.
 
-Things you may want to cover:
+The vast majority of the code has been borrowed from <https://github.com/skanev/evans>, which I've been using for a Rust course (<https://fmi.rust-lang.bg>) under [my own fork](https://github.com/andrewradev/evans).
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The exercise setup has been taken from <https://github.com/igrigorik/vimgolf>, the excellent site and client for <https://vimgolf.com>.
