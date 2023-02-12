@@ -10,7 +10,7 @@
   <dl>
     <% if @user.github.present? %>
       <dt>GitHub</dt>
-      <dd><%= link_to @user.github, "http://github.com/#{@user.github}" %></dd>
+      <dd><%= link_to @user.github, "https://github.com/#{@user.github}" %></dd>
     <% end %>
 
     <% if logged_in? and @user.discord.present? %>

@@ -62,4 +62,9 @@ class User < ApplicationRecord
       paginate page: page_number, per_page: 20
     end
   end
+
+  def points
+    # TODO
+    0
+  end
 end
