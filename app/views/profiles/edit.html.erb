@@ -30,8 +30,8 @@
     <legend>Малко лична информация за вас</legend>
 
     <%= form.input :github %>
-    <%= form.input :discord %>
-    <%= form.input :about, input_html: {size: '50x5'} %>
+    <%= form.input :discord, input_html: { autocomplete: 'off' } %>
+    <%= form.input :about, input_html: { size: '50x5' } %>
   </fieldset>
 
   <fieldset>
@@ -43,7 +43,7 @@
     <legend>Промяна на парола</legend>
     <p>Ако не искате да променяте паролата си, оставете долните полета празни:</p>
 
-    <%= form.input :password, input_html: { autocomplete: 'off' } %>
+    <%= form.input :password, input_html: { autocomplete: 'new-password' } %>
     <%= form.input :password_confirmation %>
   </fieldset>
 
