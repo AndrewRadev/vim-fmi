@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   helper_method :can_edit?, :logged_in?, :admin?
 
+  before_action :set_sentry_user
+
   private
+
+  def set_sentry_user
+    Sentry.set_user(id: current_user.id) if logged_in?
+  end
 
   def after_sign_in_path_for(something)
     dashboard_path
