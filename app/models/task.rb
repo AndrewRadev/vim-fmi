@@ -29,6 +29,6 @@ class Task < ApplicationRecord
   end
 
   def label
-    "Задача за #{opens_at.strftime("%A, %-d %B %Y")}"
+    "Задача за #{I18n.l(opens_at, format: "%A, %d.%m.%Y")}"
   end
 end
