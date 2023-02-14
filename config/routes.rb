@@ -12,8 +12,12 @@ Rails.application.routes.draw do
   resources :announcements, except: %w(destroy)
   resources :lectures, only: :index
 
+  # Compatibility with vimgolf binary
+  get '/challenges/:id.json' => 'tasks#show'
+  post '/entry.json' => 'solutions#update'
+
   resources :tasks, except: :destroy do
-    resources :solutions, only: %w(index show update) do
+    resources :solutions, only: %w(index create show update) do
       get :unscored, on: :collection
     end
     resource :my_solution, only: %w(show)

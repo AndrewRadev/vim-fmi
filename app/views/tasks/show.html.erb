@@ -7,10 +7,13 @@
     <% end %>
 
     <%= authenticated_only do %>
-      <%= link_to 'Предай решение', task_my_solution_path(@task), class: [:action, :primary] %>
-
-      <% if @current_user_solution %>
-        <%= link_to 'Коментари към моето решение', @current_user_solution, class: [:action, :primary] %>
+      <% if @incomplete_solution %>
+        Предай решение: <code>vim-fmi put <%= @incomplete_solution.token %></code>
+      <% else %>
+        <%= link_to 'Предай решение', task_solutions_path(@task), {
+          method: :post,
+          class:  [:action, :primary],
+        } %>
       <% end %>
     <% end %>
   </p>
@@ -21,6 +24,22 @@
 
   <% if @task.closed? %>
     <p class="closed">Срокът за предаване на решения е отминал</p>
+  <% end %>
+
+  <% if @completed_solutions %>
+    <%# link_to 'Коментари към моето решение', @current_user_solution, class: [:action, :primary] %>
+
+    <p>
+      <h3>Твоите решения</h3>
+
+      <ul>
+      <% @completed_solutions.each do |solution| %>
+        <li>
+          <code><% VimKeylog.new(solution.script, solution.created_at).each do |key| %><% if key.size > 1 %><span class="special-key"><%= key %></span><% else %><%= key %><% end %><% end %></code>
+        </li>
+      <% end %>
+      </ul>
+    </p>
   <% end %>
 
   <dl>

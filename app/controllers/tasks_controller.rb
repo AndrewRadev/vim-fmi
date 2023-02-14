@@ -1,3 +1,5 @@
+require 'vim_keylog'
+
 class TasksController < ApplicationController
   before_action :require_admin, except: %w(index show)
 
@@ -27,12 +29,30 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
+    respond_to do |format|
+      format.json do
+        # ID is token
+        solution = Solution.find_by!(token: params[:id])
+        task = solution.task
 
-    # TODO (2023-02-06) Solutions
-    # @current_user_solution = Solution.for(current_user, @task) if current_user
+        render json: {
+          in: { data: task.input, type: 'txt' },
+          out: { data: task.output, type: 'txt' },
+          client: '0.5.0',
+        }
+      end
 
-    deny_access if @task.hidden? and not admin?
+      format.html do
+        @task = Task.find(params[:id])
+
+        if current_user
+          @incomplete_solution = current_user.solutions.incomplete.in_chronological_order.first
+          @completed_solutions = current_user.solutions.completed.in_chronological_order
+        end
+
+        deny_access if @task.hidden? and not admin?
+      end
+    end
   end
 
   def edit
@@ -48,6 +68,8 @@ class TasksController < ApplicationController
       render :edit
     end
   end
+
+  private
 
   def task_params
     params.require(:task).permit(
