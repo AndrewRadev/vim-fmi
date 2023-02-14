@@ -15,11 +15,13 @@
 # Indexes
 #
 #  index_solutions_on_task_id  (task_id)
+#  index_solutions_on_token    (token) UNIQUE
 #  index_solutions_on_user_id  (user_id)
 #
 class Solution < ApplicationRecord
   belongs_to :task
   belongs_to :user
+  validates :token, presence: true, uniqueness: true
 
   scope :incomplete, -> { where(points: 0) }
   scope :completed, -> { where.not(points: 0) }

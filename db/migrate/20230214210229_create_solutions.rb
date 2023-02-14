@@ -10,5 +10,7 @@ class CreateSolutions < ActiveRecord::Migration[7.0]
 
       t.timestamps null: false
     end
+
+    add_index :solutions, :token, unique: true
   end
 end

@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_210229) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_solutions_on_task_id"
+    t.index ["token"], name: "index_solutions_on_token", unique: true
     t.index ["user_id"], name: "index_solutions_on_user_id"
   end
 
