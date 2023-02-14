@@ -8,7 +8,7 @@ class SolutionsController < ApplicationController
     Solution.create!({
       task: task,
       user: current_user,
-      token: SecureRandom.uuid,
+      token: SecureRandom.hex,
     })
 
     redirect_to task
