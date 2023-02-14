@@ -35,7 +35,7 @@
       <ul>
       <% @completed_solutions.each do |solution| %>
         <li>
-          <code><% VimKeylog.new(solution.script, solution.created_at).each do |key| %><% if key.size > 1 %><span class="special-key"><%= key %></span><% else %><%= key %><% end %><% end %></code>
+          <code><% VimKeylog.new(solution.script).each do |key| %><% if key.size > 1 %><span class="special-key"><%= key %></span><% else %><%= key %><% end %><% end %></code>
         </li>
       <% end %>
       </ul>

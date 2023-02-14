@@ -7,11 +7,10 @@
 class VimKeylog
   include Enumerable
 
-  def initialize(input, time=Time.now.utc)
+  def initialize(input)
     # Force encoding of solution text. Must match string literals.
     # .force_encoding CHANGES THE ORIGINAL STRING!
     @input = input.force_encoding(Encoding::ASCII_8BIT)
-    @time = time
   end
 
   def to_s(sep = '')
@@ -30,10 +29,6 @@ class VimKeylog
       n = c.ord
       if n == 0x80
         b2, b3 = scanner.get_byte, scanner.get_byte
-        if b2 == "\xfd" && b3 >= "\x38" && @time.between?(*NO_SNIFF_DATE_RANGE)
-          # Should we account for KE_SNIFF removal?
-          b3 = (b3.ord + 1).chr
-        end
         code = KC_MBYTE[b2+b3]
         yield code if code # ignore "nil" keystrokes (like window focus)
       else
@@ -51,9 +46,6 @@ class VimKeylog
   KC_1BYTE[0x0d] = "<CR>"
   KC_1BYTE[0x0a] = "<NL>"
   KC_1BYTE[0x09] = "<Tab>"
-
-  # Between these dates, assume KE_SNIFF is removed.
-  NO_SNIFF_DATE_RANGE = [Time.utc(2016, 4), Time.utc(2017, 7)]
 
   KC_MBYTE = Hash.new do |_h,k|
     '<' + k.bytes.map {|b| "%02x" % b}.join('-') + '>' # For missing keycodes
