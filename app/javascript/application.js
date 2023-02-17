@@ -25,4 +25,16 @@ $(document).ready(function() {
       },
     }, 1000);
   }));
+
+  var $body = $(document.body);
+
+  $('[data-toggle-mobile-menu]').on('click', function(event) {
+    $body.toggleClass('mobile-menu-open')
+    event.stopPropagation()
+  });
+
+  $('.js-site-content-overlay').on('click', function(event) {
+    $body.removeClass('mobile-menu-open')
+    event.preventDefault()
+  });
 });
