@@ -26,22 +26,6 @@
     <p class="closed">Срокът за предаване на решения е отминал</p>
   <% end %>
 
-  <% if @completed_solutions %>
-    <%# link_to 'Коментари към моето решение', @current_user_solution, class: [:action, :primary] %>
-
-    <p>
-      <h3>Твоите решения</h3>
-
-      <ul>
-      <% @completed_solutions.each do |solution| %>
-        <li>
-          <code><% VimKeylog.new(solution.script).each do |key| %><% if key.size > 1 %><span class="special-key"><%= key %></span><% else %><%= key %><% end %><% end %></code>
-        </li>
-      <% end %>
-      </ul>
-    </p>
-  <% end %>
-
   <dl>
     <dt>Краен срок:</dt>
     <dd><%= l @task.closes_at %></dd>
@@ -51,14 +35,36 @@
   </dl>
 
   <p>
-    <h3>Начално състояние</h3>
-    <%= render 'shared/code', code: @task.input %>
-
-    <h3>Крайно състояние</h3>
-    <%= render 'shared/code', code: @task.output %>
-
     <% if @task.description? %>
       <p><%= @task.description %></p>
     <% end %>
+
+    <table class="input-output-table">
+      <tr>
+        <th>Начално състояние</th>
+        <th>Крайно състояние</th>
+      </tr>
+
+      <tr>
+        <td><%= render 'shared/code', code: @task.input %></td>
+        <td><%= render 'shared/code', code: @task.output %></td>
+      </tr>
+    </table>
   </p>
+
+  <% if @completed_solutions %>
+    <%# link_to 'Коментари към моето решение', @current_user_solution, class: [:action, :primary] %>
+
+    <p>
+      <h3>Твоите решения</h3>
+
+      <ul>
+      <% @completed_solutions.each do |solution| %>
+        <li>
+          <code><%= render 'shared/script', script: solution.script %></code>
+        </li>
+      <% end %>
+      </ul>
+    </p>
+  <% end %>
 </div>

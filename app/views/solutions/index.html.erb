@@ -1,0 +1,29 @@
+<h1><%= @task.label %>: Решения</h1>
+
+<p><%= link_to 'Към задачата', @task, class: :back %></p>
+
+<p>
+  <strong><%= @solutions.count %></strong> решения
+</p>
+
+<table class="solutions">
+  <thead>
+    <tr>
+      <th class="name">Име</th>
+      <th class="script">Решение</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @solutions.each do |solution| %>
+      <tr>
+        <td class="name">
+          <%= link_to solution.user_name, solution.user %>
+        </td>
+        <td class="script">
+          <code><%= render 'shared/script', script: solution.script %></code>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

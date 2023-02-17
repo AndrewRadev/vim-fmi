@@ -68,3 +68,24 @@ p.task-guide-notice { font-style: italic; color: $quiet; }
   color: #990000;
   font-weight: bold;
 }
+
+.input-output-table {
+  width: 100%;
+  border-collapse: separate;
+
+  th {
+    font-weight: bold;
+    text-align: left;
+  }
+
+  th, td {
+    padding: 8px 16px;
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+
+  td {
+    width: 50%;
+  }
+}

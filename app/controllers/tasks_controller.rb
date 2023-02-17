@@ -46,8 +46,10 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
 
         if current_user
-          @incomplete_solution = current_user.solutions.incomplete.in_chronological_order.first
-          @completed_solutions = current_user.solutions.completed.in_chronological_order
+          solutions = current_user.solutions.where(task: @task)
+
+          @incomplete_solution = solutions.incomplete.in_chronological_order.first
+          @completed_solutions = solutions.completed.in_chronological_order
         end
 
         deny_access if @task.hidden? and not admin?

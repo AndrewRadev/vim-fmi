@@ -17,7 +17,7 @@
 #  index_tasks_on_closes_at  (closes_at)
 #
 class Task < ApplicationRecord
-  scope :in_chronological_order, -> { order('closes_at ASC') }
+  scope :in_chronological_order, -> { order('closes_at DESC') }
   scope :visible, -> { in_chronological_order.where('opens_at >= ?', Time.current) }
 
   def closed?

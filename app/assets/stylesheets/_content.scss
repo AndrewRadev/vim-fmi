@@ -40,8 +40,6 @@
 
   img.emoji { width: 20px; height: 20px; vertical-align: middle; }
 
-  table:not(.highlighter) { @include data-table; }
-
   ul.item-list {
     margin: 0;
     margin-top: 10px;

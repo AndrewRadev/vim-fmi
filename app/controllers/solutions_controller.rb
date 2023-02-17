@@ -1,6 +1,17 @@
 class SolutionsController < ApplicationController
-  before_action :require_user, only: :create
+  before_action :require_user, only: [:index, :create]
   skip_before_action :verify_authenticity_token, only: :update
+
+  def index
+    @task = Task.find(params[:task_id])
+
+    unless Solution.exists?(user_id: current_user.id, task_id: @task.id) or admin?
+      deny_access
+      return
+    end
+
+    @solutions = Solution.latest_for_task(params[:task_id])
+  end
 
   def create
     task = Task.find(params[:task_id])

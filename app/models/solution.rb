@@ -26,4 +26,16 @@ class Solution < ApplicationRecord
   scope :incomplete, -> { where(points: 0) }
   scope :completed, -> { where.not(points: 0) }
   scope :in_chronological_order, -> { order('updated_at DESC') }
+
+  def self.latest_for_task(task_id)
+    latest_scope = where(task_id: task_id).
+      select('DISTINCT ON (user_id) solutions.id').
+      order('user_id, solutions.created_at DESC')
+
+    where(id: latest_scope).order('created_at DESC')
+  end
+
+  def user_name
+    user.name
+  end
 end
