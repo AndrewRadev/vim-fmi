@@ -20,7 +20,6 @@ $(document).ready(function() {
       dataType: 'html',
       success: (data) => $previewArea.html(data),
       headers: {
-        'X-Transaction': 'POST Example',
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       },
     }, 1000);
