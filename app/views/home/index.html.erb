@@ -1,5 +1,6 @@
 <div id="home-page">
   <h1>Здравейте!</h1>
+
   <p>
     Това е сайтът на избираемия курс "Употреба и скриптиране на Vim" към
     <abbr title="Факултет по Математика и Информатика">ФМИ</abbr> София.
@@ -7,17 +8,24 @@
 
   <h2>Новини</h2>
 
-  <%#
-  #announcements= render @announcements
+  <div id="announcements">
+    <%= render @announcements %>
+  </div>
 
-  - if @previous_sites.present?
-    %h1 Сайтове на предишни издания на курса
-    %p
+  <% if @previous_sites.present? %>
+    <h1>Сайтове на предишни издания на курса</h1>
+
+    <p>
       Ако търсите сайтовете на някои от предишните издания на курса, може да ги намерите тук:
-    %ul
-      - @previous_sites.each do |site|
-        %li
-          = site['name']
+    </p>
+    <ul>
+      <% @previous_sites.each do |site| %>
+        <li>
+          <%= site['name'] %>
           &mdash;
-          = link_to site['url'], "http://#{site['url']}"
-        %>
+          <%= link_to site['url'], "http://#{site['url']}" %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
