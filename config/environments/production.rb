@@ -1,7 +1,7 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.load_site_yml_into_config
+  Rails.application.load_site_yml_into_config
 
   # Settings specified here will take precedence over those in config/application.rb.
 
