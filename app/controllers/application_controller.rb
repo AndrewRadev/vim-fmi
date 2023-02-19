@@ -25,7 +25,6 @@ class ApplicationController < ActionController::Base
     something.editable_by? current_user
   end
 
-  # TODO (2023-01-25) Translate
   def deny_access(message = 'Нямате достъп до тази страница.')
     redirect_to root_path, alert: message
   end

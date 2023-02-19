@@ -15,6 +15,8 @@ class ProfilesController < ApplicationController
       :discord,
       :about,
       :comment_notification,
+      :password,
+      :password_confirmation
     )
 
     if @user.update(user_params)
