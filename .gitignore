@@ -25,6 +25,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/site.yml
+/config/database.yml
 
 /app/assets/builds/*
 !/app/assets/builds/.keep

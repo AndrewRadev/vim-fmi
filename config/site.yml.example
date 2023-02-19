@@ -1,0 +1,11 @@
+course_domain: 'vim-fmi.bg'
+short_course_name: 'Vim @ FMI'
+course_name: 'Употреба и скриптиране на Vim'
+course_email: 'team@vim-fmi.bg'
+# smtp_settings:
+#   address:
+#   port:
+#   authentication:
+#   user_name:
+#   password:
+#   enable_starttls_auto:

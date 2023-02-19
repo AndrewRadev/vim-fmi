@@ -37,9 +37,13 @@ module VimFmi
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    # Site config:
-    config.short_course_name = 'Vim @ FMI'
-    config.course_name = 'Употреба и скриптиране на Vim'
-    config.course_email = 'team@vim-fmi.bg'
+    def load_site_yml_into_config
+      site_config = Rails.root.join('config/site.yml')
+      raise "You need to have a config/site.yml" unless site_config.exist?
+
+      YAML.load_file(site_config).each do |key, value|
+        config.send "#{key}=", value
+      end
+    end
   end
 end
