@@ -5,7 +5,7 @@ task import_students: :environment do
   path = Rails.root.join('students.csv').to_s
 
   CSV.foreach(path, headers: true) do |row|
-    SignUp.create!({
+    SignUp.find_or_create_by!({
       faculty_number: row.fetch('faculty_number'),
       full_name:      row.fetch('name'),
     })
