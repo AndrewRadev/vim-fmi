@@ -31,7 +31,7 @@ class Registration
   private
 
   def sign_up
-    SignUp.find_by(full_name: full_name, faculty_number: faculty_number)
+    SignUp.find_by(full_name: full_name.strip, faculty_number: faculty_number.strip)
   end
 
   def email_not_taken
