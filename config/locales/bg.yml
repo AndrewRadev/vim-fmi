@@ -20,6 +20,10 @@ bg:
         phone: Не е публичен; ползваме го само в краен случай
         site: Ако имате такъв; не забравяйте да укажете протокол (например http://)
         about: Ако искате
+  will_paginate:
+    previous_label: "&larr;"
+    next_label: "&rarr;"
+    page_gap: "&hellip;"
   helpers:
     submit:
       reply:
