@@ -32,6 +32,7 @@ class Voucher < ApplicationRecord
       return false if voucher.nil? or voucher.claimed?
 
       voucher.update!(user_id: user.id, claimed_at: Time.current)
+      user.update_points
     end
   end
 end

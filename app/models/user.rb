@@ -18,6 +18,7 @@
 #  last_sign_in_ip        :string
 #  name                   :string           not null
 #  photo                  :string
+#  points_breakdown       :json             not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -38,10 +39,12 @@ class User < ApplicationRecord
 
   has_many :solutions
   has_many :tasks, -> { distinct }, through: :solutions
+  has_many :vouchers
 
   mount_uploader :photo, PhotoUploader
 
   validates :password, confirmation: true, unless: -> { password.blank? }
+  serialize :points_breakdown, PointsBreakdown
 
   class << self
     def shorten_name(name)
@@ -65,7 +68,10 @@ class User < ApplicationRecord
   end
 
   def points
-    # TODO
-    0
+    points_breakdown.total
+  end
+
+  def update_points
+    update!(points_breakdown: points_breakdown.update(self))
   end
 end

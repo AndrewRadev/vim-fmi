@@ -2,15 +2,16 @@
 #
 # Table name: solutions
 #
-#  id         :bigint           not null, primary key
-#  meta       :json             not null
-#  points     :integer          default(0), not null
-#  script     :binary
-#  token      :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  task_id    :bigint           not null
-#  user_id    :bigint           not null
+#  id           :bigint           not null, primary key
+#  completed_at :datetime
+#  meta         :json             not null
+#  points       :integer          default(0), not null
+#  script       :binary
+#  token        :string           not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  task_id      :bigint           not null
+#  user_id      :bigint           not null
 #
 # Indexes
 #
@@ -23,8 +24,8 @@ class Solution < ApplicationRecord
   belongs_to :user
   validates :token, presence: true, uniqueness: true
 
-  scope :incomplete, -> { where(points: 0) }
-  scope :completed, -> { where.not(points: 0) }
+  scope :incomplete, -> { where(completed_at: nil) }
+  scope :completed, -> { where.not(completed_at: nil) }
   scope :in_chronological_order, -> { order('updated_at DESC') }
 
   def self.latest_for_task(task_id)

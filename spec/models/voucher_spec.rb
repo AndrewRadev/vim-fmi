@@ -31,6 +31,12 @@ describe Voucher do
       it "returns true" do
         expect(Voucher.claim(user, voucher.code)).to be true
       end
+
+      it "updates the user's points" do
+        expect {
+          Voucher.claim(user, voucher.code)
+        }.to change { user.reload.points }.from(0).to(1)
+      end
     end
 
     context "a claimed voucher" do

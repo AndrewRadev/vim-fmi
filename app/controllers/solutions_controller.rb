@@ -36,7 +36,12 @@ class SolutionsController < ApplicationController
 
       if solution
         # TODO (2023-02-14) Verify user with API key, change param names
-        solution.update!(script: entry, points: solution.task.points)
+        solution.update!({
+          script:       entry,
+          points:       solution.task.points,
+          completed_at: Time.current,
+        })
+        user.update_points
       end
     end
 

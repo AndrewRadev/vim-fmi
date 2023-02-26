@@ -20,6 +20,7 @@ class ProfilesController < ApplicationController
     )
 
     if @user.update(user_params)
+      @user.update_points
       sign_in @user, bypass: true
       redirect_to dashboard_path, notice: 'Профилът ви е обновен'
     else
