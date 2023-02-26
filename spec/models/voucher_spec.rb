@@ -54,10 +54,10 @@ describe Voucher do
       end
     end
 
-    context "an unexisting voucher" do
+    context "an non-existing voucher" do
       it "returns false" do
         user = create :user
-        expect(Voucher.claim(user, 'unexisting code')).to be false
+        expect(Voucher.claim(user, 'non-existing code')).to be false
       end
     end
   end

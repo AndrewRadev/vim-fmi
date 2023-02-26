@@ -5,7 +5,7 @@ describe Activation do
     create :sign_up, token: 'token'
 
     expect(Activation.for('token')).to be_present
-    expect(Activation.for('unexisting')).to be_nil
+    expect(Activation.for('non-existing')).to be_nil
   end
 
   it "validates the password's confirmation" do
