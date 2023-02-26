@@ -1,0 +1,32 @@
+<h1>Точки до момента</h1>
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Име</th>
+      <th>Фак. №</th>
+      <th>Ваучъри</th>
+      <th>Упражнения</th>
+      <th>Снимка</th>
+      <th>Общо</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <div class="flex-row flex-align-center gap-8">
+            <%= user_thumbnail(user, :size30) %>
+            <%= link_to user.name, user_path(user) %>
+          </div>
+        </td>
+        <td><%= user.faculty_number %></td>
+        <td><%= user.points_breakdown.vouchers %></td>
+        <td><%= user.points_breakdown.tasks %>/<%= @total_task_points %></td>
+        <td><%= user.points_breakdown.photo %></td>
+        <td><%= user.points_breakdown.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

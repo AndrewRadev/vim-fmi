@@ -13,21 +13,21 @@ class PointsBreakdown
   end
 
   def update(user)
-    self.attributes[:tasks] = user.solutions.completed.sum(:points)
-    self.attributes[:vouchers] = user.vouchers.count
-    self.attributes[:photo] = user.photo? ? 1 : 0
+    self.attributes['tasks'] = user.solutions.completed.sum(:points)
+    self.attributes['vouchers'] = user.vouchers.count
+    self.attributes['photo'] = user.photo? ? 1 : 0
     self
   end
 
   def tasks
-    attributes.fetch(:tasks, 0)
+    attributes.fetch('tasks', 0)
   end
 
   def vouchers
-    attributes.fetch(:vouchers, 0)
+    attributes.fetch('vouchers', 0)
   end
 
   def photo
-    attributes.fetch(:photo, 0)
+    attributes.fetch('photo', 0)
   end
 end
