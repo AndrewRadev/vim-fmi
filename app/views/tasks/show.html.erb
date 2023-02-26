@@ -59,11 +59,11 @@
       <h3>Твоите решения</h3>
 
       <ul>
-      <% @completed_solutions.each do |solution| %>
-        <li>
-          <code><%= render 'shared/script', script: solution.script %></code>
-        </li>
-      <% end %>
+        <% @completed_solutions.each do |solution| %>
+          <li>
+            <code><%= render 'shared/script', script: solution.script %></code>
+          </li>
+        <% end %>
       </ul>
     </p>
   <% end %>

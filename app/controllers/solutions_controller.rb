@@ -13,6 +13,13 @@ class SolutionsController < ApplicationController
     @solutions = Solution.latest_for_task(params[:task_id])
   end
 
+  def show
+    @solution = Solution.find(params[:id])
+    @other_solutions = @solution.user.solutions.where.not(id: @solution.id).where(task_id: @solution.task_id)
+
+    deny_access unless @solution.visible_to?(current_user)
+  end
+
   def create
     task = Task.find(params[:task_id])
 
@@ -36,12 +43,13 @@ class SolutionsController < ApplicationController
 
       if solution
         # TODO (2023-02-14) Verify user with API key, change param names
+        # TODO (2023-02-26) Don't allow the same solution to be submitted twice
         solution.update!({
           script:       entry,
           points:       solution.task.points,
           completed_at: Time.current,
         })
-        user.update_points
+        solution.user.update_points
       end
     end
 

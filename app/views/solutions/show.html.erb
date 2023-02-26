@@ -1,0 +1,29 @@
+<div class="solution">
+  <h1>Решения на <%= @solution.task_label %> от <%= @solution.user_name %></h1>
+
+  <p><%= link_to 'Обратно към всички решения', task_solutions_path(@solution.task) %></p>
+  <p><%= link_to "Към профила на #{@solution.user_name}", @solution.user %></p>
+
+  <h2>Код</h2>
+  <code><%= render 'shared/script', script: @solution.script %></code>
+
+  <%# if @solution.commentable_by? current_user %>
+    <%# simple_form_for [@solution, Comment.new] do |form| %>
+      <%# render 'comments/form', form: form %>
+    <%# end %>
+  <%# end %>
+
+  <% if @other_solutions.count > 0 %>
+    <p>
+      <h3>Други решения</h3>
+
+      <ul>
+        <% @other_solutions.each do |solution| %>
+          <li>
+            <code><%= render 'shared/script', script: solution.script %></code>
+          </li>
+        <% end %>
+      </ul>
+    </p>
+  <% end %>
+</div>

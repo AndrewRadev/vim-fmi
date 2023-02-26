@@ -9,11 +9,11 @@
         <% case activity.kind %>
         <% when :comment %>
           остави коментар на
-          <%= link_to "решение на #{activity.subject}", task_solution_path(activity.secondary_id, activity.target_id) %>
         <% when :solution %>
           предаде
-          <%= link_to "решение на #{activity.subject}", task_solution_path(activity.secondary_id, activity.target_id) %>
         <% end %>
+
+        <%= link_to "решение на упражнение #{"%03d" % activity.task_number}", task_solution_path(activity.secondary_id, activity.target_id) %>
 
         <time datetime="<%= activity.happened_at.iso8601 %>">
           <%= l activity.happened_at.in_time_zone(Time.zone) %>

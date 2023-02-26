@@ -1,7 +1,7 @@
 class Feed
   class Activity
     attr_accessor :kind, :user_id, :user_name, :target_id, :secondary_id,
-                  :subject, :happened_at
+                  :task_number, :happened_at
 
     def initialize(hash)
       hash.each do |key, value|
@@ -39,7 +39,7 @@ class Feed
           users.name          AS user_name,
           solutions.id        AS target_id,
           tasks.id            AS secondary_id,
-          'TODO'              AS subject,
+          tasks.number        AS task_number,
           comments.created_at AS happened_at
         FROM comments
           LEFT JOIN users     ON comments.user_id = users.id
@@ -52,7 +52,7 @@ class Feed
           users.name           AS user_name,
           solutions.id         AS target_id,
           solutions.task_id    AS secondary_id,
-          'TODO'               AS subject,
+          tasks.number         AS task_number,
           solutions.updated_at AS happened_at
         FROM solutions
           LEFT JOIN users ON solutions.user_id = users.id

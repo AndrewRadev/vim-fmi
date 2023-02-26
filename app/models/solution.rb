@@ -39,4 +39,21 @@ class Solution < ApplicationRecord
   def user_name
     user.name
   end
+
+  def task_label
+    task.label
+  end
+
+  def visible_to?(user)
+    return true if user&.admin?
+    return true if task.closed?
+
+    self.user == user
+  end
+
+  def commentable_by?(user)
+    return false if user.nil?
+
+    task.closed? or user.admin? or self.user == user
+  end
 end
