@@ -8,9 +8,9 @@ class ProfilesController < ApplicationController
   def update
     @user = current_user
 
-    # TODO (2023-01-31) Password updates?
     user_params = params.require(:user).permit(
       :photo,
+      :remove_photo,
       :github,
       :discord,
       :about,
@@ -21,7 +21,7 @@ class ProfilesController < ApplicationController
 
     if @user.update(user_params)
       @user.update_points
-      sign_in @user, bypass: true
+      bypass_sign_in @user
       redirect_to dashboard_path, notice: 'Профилът ви е обновен'
     else
       render :edit
