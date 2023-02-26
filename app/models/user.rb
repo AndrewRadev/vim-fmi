@@ -37,6 +37,7 @@ class User < ApplicationRecord
   scope :students, -> { where(admin: false) }
 
   has_many :solutions
+  has_many :tasks, -> { distinct }, through: :solutions
 
   mount_uploader :photo, PhotoUploader
 
