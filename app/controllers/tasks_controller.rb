@@ -5,9 +5,9 @@ class TasksController < ApplicationController
 
   def index
     @tasks = if admin?
-      Task.in_chronological_order
+      Task.in_numeric_order
     else
-      Task.visible
+      Task.visible.in_numeric_order
     end
   end
 
@@ -15,6 +15,7 @@ class TasksController < ApplicationController
     @task = Task.new({
       opens_at:  Date.tomorrow.beginning_of_day,
       closes_at: Date.tomorrow.end_of_day,
+      number:    (Task.maximum(:number) || 0) + 1,
     })
   end
 
@@ -75,6 +76,7 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(
+      :number,
       :opens_at, :closes_at,
       :input, :output,
       :description, :points,

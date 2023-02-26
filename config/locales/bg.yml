@@ -92,6 +92,7 @@ bg:
         title: Заглавие
         body: Тяло
       task:
+        number: Пореден номер
         description: Описание
         checked: Проверена
         hidden: Скрита
@@ -99,6 +100,7 @@ bg:
         output: Изход
         opens_at: Начало
         closes_at: Край
+        points: Точки
       solution:
         adjustment: Корекция
         points: Точки

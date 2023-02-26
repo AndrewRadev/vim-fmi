@@ -6,6 +6,7 @@
 #  closes_at   :datetime
 #  description :text
 #  input       :text             not null
+#  number      :integer          not null
 #  opens_at    :datetime
 #  output      :text             not null
 #  points      :integer          default(1), not null
@@ -15,8 +16,12 @@
 # Indexes
 #
 #  index_tasks_on_closes_at  (closes_at)
+#  index_tasks_on_number     (number) UNIQUE
 #
 class Task < ApplicationRecord
+  has_many :solutions
+
+  scope :in_numeric_order, -> { order('number DESC') }
   scope :in_chronological_order, -> { order('closes_at DESC') }
   scope :visible, -> { in_chronological_order.where('opens_at >= ?', Time.current) }
 
@@ -29,6 +34,6 @@ class Task < ApplicationRecord
   end
 
   def label
-    "Задача за #{I18n.l(opens_at, format: "%A, %d.%m.%Y")}"
+    "Упражнение #{"%03d" % number}"
   end
 end

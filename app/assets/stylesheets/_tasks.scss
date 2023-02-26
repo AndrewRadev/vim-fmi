@@ -33,6 +33,7 @@ table.solutions {
   > table {
     @include data-table;
 
+    td.solved { width: 52px; }
     td.name { @include link-table-cell(10px 15px); }
     td.closes_at { width: 20%; min-width: 160px; }
   }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_26_162138) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_26_163403) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,7 +64,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_26_162138) do
     t.integer "points", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number", null: false
     t.index ["closes_at"], name: "index_tasks_on_closes_at"
+    t.index ["number"], name: "index_tasks_on_number", unique: true
   end
 
   create_table "users", force: :cascade do |t|
