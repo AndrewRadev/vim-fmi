@@ -37,9 +37,9 @@ class TasksController < ApplicationController
         task = solution.task
 
         render json: {
-          in: { data: task.input, type: 'txt' },
-          out: { data: task.output, type: 'txt' },
-          client: '0.5.0',
+          input: task.input,
+          output: task.output,
+          version: '0.1.0',
         }
       end
 
