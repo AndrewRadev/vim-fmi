@@ -32,5 +32,7 @@ Rails.application.routes.draw do
 
   resource :preview, only: :create
 
+  get 'guides/tasks', as: :task_guide
+
   root "home#index"
 end
