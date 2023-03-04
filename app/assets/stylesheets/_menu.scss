@@ -15,7 +15,17 @@
       text-decoration: none;
       width: 100%;
 
-      &:hover { background-color: $menu-color; color: white; text-decoration: none; }
+      &:hover {
+        color: white;
+        background-color: $menu-color;
+        text-decoration: none;
+      }
     }
+  }
+
+  .active {
+    color: white;
+    background-color: lighten($menu-color, 10%);
+    text-decoration: none;
   }
 }

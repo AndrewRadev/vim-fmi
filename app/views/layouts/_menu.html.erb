@@ -1,6 +1,6 @@
 <ul>
   <% unless mobile %>
-    <li><%= link_to 'Начало', root_path %></li>
+    <li><%= menu_link_to 'Начало', root_path %></li>
   <% end %>
 
   <% if mobile and not user_signed_in? %>
@@ -9,21 +9,21 @@
   <% end %>
 
   <% if user_signed_in? %>
-    <li><%= link_to 'Табло', dashboard_path %></li>
+    <li><%= menu_link_to 'Табло', dashboard_path %></li>
   <% end %>
 
-  <li><%= link_to 'Новини', announcements_path %></li>
-  <li><%= link_to 'Материали', lectures_path %></li>
-  <li><%= link_to 'Упражнения', tasks_path %></li>
+  <li><%= menu_link_to 'Новини', announcements_path %></li>
+  <li><%= menu_link_to 'Материали', lectures_path %></li>
+  <li><%= menu_link_to 'Упражнения', tasks_path %></li>
 
-  <li><%= link_to 'Потребители', users_path %></li>
-  <li><%= link_to 'Екип', team_path %></li>
+  <li><%= menu_link_to 'Потребители', users_path %></li>
+  <li><%= menu_link_to 'Екип', team_path %></li>
 
   <% if admin? %>
-    <li><%= link_to 'Активност', activities_path %></li>
-    <li><%= link_to 'Ваучъри', vouchers_path %></li>
-    <li><%= link_to 'Записани', sign_ups_path %></li>
-    <li><%= link_to 'Точки', points_breakdowns_path %></li>
+    <li><%= menu_link_to 'Активност', activities_path %></li>
+    <li><%= menu_link_to 'Ваучъри', vouchers_path %></li>
+    <li><%= menu_link_to 'Записани', sign_ups_path %></li>
+    <li><%= menu_link_to 'Точки', points_breakdowns_path %></li>
   <% end %>
 
   <% if mobile and user_signed_in? %>

@@ -1,6 +1,17 @@
 require 'markup'
 
 module ApplicationHelper
+  def current_path
+    URI.parse(request.url).path
+  end
+
+  def menu_link_to(*args, **kwargs)
+    url_path = args.fetch(1)
+    kwargs[:class] = 'active' if current_path == url_path
+
+    link_to(*args, **kwargs)
+  end
+
   def user_thumbnail(user, version = :size150)
     image = user.photo.try(:url, version) || image_path("photoless-user/#{version}.png")
     css_classes = %w(avatar)
