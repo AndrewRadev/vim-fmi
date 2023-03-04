@@ -1,0 +1,38 @@
+<h1>Твоите токени</h1>
+
+<p>Ако не си сигурен какво значи това, виж <%= link_to 'инструкциите', task_guide_path %>.</p>
+
+<% if @user_tokens.blank? %>
+  <p>Нямаш token, създай си и го активирай, за да пускаш упражнения</p>
+<% else %>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th class="active">Активен</th>
+        <th class="label">Етикет</th>
+        <th class="token">Токен</th>
+        <th class="timestamp">Създаден</th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user_tokens.each do |token| %>
+        <tr>
+          <td class="active"><%= token.activated_at? ? '✅' : '❌' %></td>
+          <td class="label"><%= token.label %></td>
+          <td class="token fixed-width"><%= token.body %></td>
+          <td class="timestamp"><%= I18n.l(token.created_at) %></td>
+          <td class="actions">
+            <%= link_to '🗑️', user_token_path(token), {
+              method: :delete,
+              data:   { confirm: "Премахваме токена?" },
+            } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to 'Нов token', new_user_token_path, class: [:action, :primary] %>

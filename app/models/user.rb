@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :solutions
   has_many :tasks, -> { distinct }, through: :solutions
   has_many :vouchers
+  has_many :user_tokens
 
   mount_uploader :photo, PhotoUploader
 

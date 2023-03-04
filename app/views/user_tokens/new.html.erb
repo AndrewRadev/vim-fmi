@@ -1,0 +1,9 @@
+<h1>Нов token за предаване на домашни</h1>
+
+<%= simple_form_for @user_token do |form| %>
+  <%= form.input :label %>
+  <%= form.input :body, readonly: true %>
+
+  <%= form.submit %>
+<% end %>
+

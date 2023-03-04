@@ -1,8 +1,23 @@
 <div id="tasks">
   <h1>Упражнения</h1>
 
+  <% if logged_in? %>
+    <% if @user_tokens.active.blank? %>
+      Нямаш активиран token, създай си и го активирай, за да пускаш упражнения
+
+      <p>
+        <%= link_to 'Твоите токени', user_tokens_path, class: [:action, :primary] %>
+        <%= link_to 'Нов token', new_user_token_path, class: [:action, :primary] %>
+      </p>
+    <% else %>
+      <p>Имаш поне един актвииран token, можеш да пускаш упражнения</p>
+    <% end %>
+  <% end %>
+
   <%= admin_only do %>
-    <%= link_to 'Ново упражнение', new_task_path, class: [:action, :primary] %>
+    <p>
+      <%= link_to 'Ново упражнение', new_task_path, class: [:action, :primary] %>
+    </p>
   <% end %>
 
   <table>

@@ -48,6 +48,7 @@ class SolutionsController < ApplicationController
           script:       entry,
           points:       solution.task.points,
           completed_at: Time.current,
+          meta:         meta_params,
         })
         solution.user.update_points
       end
@@ -60,5 +61,14 @@ class SolutionsController < ApplicationController
         format.json { render json: { status: 'failed' }, status: 400 }
       end
     end
+  end
+
+  private
+
+  def meta_params
+    JSON.parse(params[:meta])
+  rescue => e
+    Sentry.capture_exception(e)
+    {}
   end
 end

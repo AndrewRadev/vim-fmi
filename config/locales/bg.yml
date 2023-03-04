@@ -20,6 +20,8 @@ bg:
         phone: Не е публичен; ползваме го само в краен случай
         site: Ако имате такъв; не забравяйте да укажете протокол (например http://)
         about: Ако искате
+      user_token:
+        label: "Примерно Linux/Windows, Home/Work, Token1/Token2 ..."
   will_paginate:
     previous_label: "&larr;"
     next_label: "&rarr;"
@@ -38,6 +40,9 @@ bg:
       attribution:
         create: Признай
         update: Запази
+      user_token:
+        create: Създай
+        update: Обнови
   devise:
     failure:
       invalid: Невалидна е-поща или парола.
@@ -112,9 +117,9 @@ bg:
       tip:
         title: Заглавие
         body: Тяло
-      attribution:
-        reason: Причина
-        link: Връзка
+      user_token:
+        label: Етикет
+        body: Съдържание
     errors:
       models:
         attribution:

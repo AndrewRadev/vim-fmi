@@ -95,6 +95,10 @@
   tr.hidden                     { opacity: 0.3; }
   tr.active  > td:first-child a { border-left: 3px solid $green;  }
   tr.warning > td:first-child a { border-left: 3px solid $orange; }
+
+  td.fixed-width {
+    font-family: monospace;
+  }
 }
 
 @mixin link-table-cell($padding: 10px) {
