@@ -13,7 +13,7 @@ class PointsBreakdown
   end
 
   def update(user)
-    self.attributes['tasks'] = user.solutions.completed.sum(:points)
+    self.attributes['tasks'] = user.solutions.completed.map(&:task).uniq.sum(&:points)
     self.attributes['vouchers'] = user.vouchers.count
     self.attributes['photo'] = user.photo? ? 1 : 0
     self

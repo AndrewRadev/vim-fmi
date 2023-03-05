@@ -27,6 +27,8 @@ describe PointsBreakdown do
 
     task = create :task, points: 3
     create :solution, :completed, task: task, user: user
+    # second solution for the same task, only 1 counts
+    create :solution, :completed, task: task, user: user
 
     user.update_points
     expect(user.points).to eq 4
