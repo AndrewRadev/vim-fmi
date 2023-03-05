@@ -3,7 +3,7 @@
 
   <% if logged_in? %>
     <% if @user_tokens.active.blank? %>
-      Нямаш активиран token, създай си и го активирай, за да пускаш упражнения
+      <p>Нямаш активиран token, създай си и го активирай, за да пускаш упражнения</p>
 
       <p>
         <%= link_to 'Твоите токени', user_tokens_path, class: [:action, :primary] %>
@@ -11,6 +11,10 @@
       </p>
     <% else %>
       <p>Имаш поне един актвииран token, можеш да пускаш упражнения</p>
+
+      <p>
+        <%= link_to 'Твоите токени', user_tokens_path, class: [:action, :primary] %>
+      </p>
     <% end %>
   <% end %>
 
