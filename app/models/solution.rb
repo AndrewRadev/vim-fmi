@@ -37,6 +37,10 @@ class Solution < ApplicationRecord
     where(id: latest_scope).order('created_at DESC')
   end
 
+  def user_from_token
+    UserToken.find_by(body: user_token)&.user
+  end
+
   def user_name
     user.name
   end

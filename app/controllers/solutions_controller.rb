@@ -1,6 +1,5 @@
 class SolutionsController < ApplicationController
   before_action :require_user, only: [:index, :create]
-  skip_before_action :verify_authenticity_token, only: :update
 
   def index
     @task = Task.find(params[:task_id])
@@ -30,44 +29,5 @@ class SolutionsController < ApplicationController
     })
 
     redirect_to task
-  end
-
-  def update
-    entry = Base64.decode64(params[:entry] || '')
-
-    if entry && entry.size < 2
-      cheat = true
-    elsif params[:challenge_id] && !params[:user_token].empty?
-      cheat = false
-      solution = Solution.incomplete.find_by(token: params[:challenge_id])
-
-      if solution
-        solution.update!({
-          script:       entry,
-          points:       solution.task.points,
-          completed_at: Time.current,
-          meta:         meta_params,
-          user_token:   params[:user_token],
-        })
-        solution.user.update_points
-      end
-    end
-
-    respond_to do |format|
-      if !cheat && solution
-        format.json { render json: { status: 'ok' } }
-      else
-        format.json { render json: { status: 'failed' }, status: 400 }
-      end
-    end
-  end
-
-  private
-
-  def meta_params
-    JSON.parse(params[:meta])
-  rescue => e
-    Sentry.capture_exception(e)
-    {}
   end
 end

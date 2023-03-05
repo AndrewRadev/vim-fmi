@@ -32,32 +32,16 @@ class TasksController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.json do
-        # ID is token
-        solution = Solution.find_by!(token: params[:id])
-        task = solution.task
+    @task = Task.find(params[:id])
 
-        render json: {
-          input: task.input,
-          output: task.output,
-          version: '0.1.0',
-        }
-      end
+    if current_user
+      solutions = current_user.solutions.where(task: @task)
 
-      format.html do
-        @task = Task.find(params[:id])
-
-        if current_user
-          solutions = current_user.solutions.where(task: @task)
-
-          @incomplete_solution = solutions.incomplete.in_chronological_order.first
-          @completed_solutions = solutions.completed.in_chronological_order
-        end
-
-        deny_access if @task.hidden? and not admin?
-      end
+      @incomplete_solution = solutions.incomplete.in_chronological_order.first
+      @completed_solutions = solutions.completed.in_chronological_order
     end
+
+    deny_access if @task.hidden? and not admin?
   end
 
   def edit

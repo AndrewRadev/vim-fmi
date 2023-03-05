@@ -62,6 +62,13 @@
         <% @completed_solutions.each do |solution| %>
           <li>
             <code><%= render 'shared/script', script: solution.script %></code>
+            <% admin_only do %>
+              <ul>
+                <% user_from_token = solution.user_from_token %>
+                <li>User from token: <%= user_from_token.present? ? link_to(user_from_token.full_name, user_from_token) : 'N/A' %></li>
+                <li>Meta: <code><%= solution.meta.to_json %></code></li>
+              </ul>
+            <% end %>
           </li>
         <% end %>
       </ul>

@@ -10,13 +10,13 @@ Rails.application.routes.draw do
   resource :profile, only: %w(edit update)
 
   resources :user_tokens, only: %w(index new create edit update destroy)
-  post '/user_tokens/activate.json' => 'user_tokens#activate'
 
   resources :announcements, except: %w(destroy)
   resources :lectures, only: :index
 
-  # Compatibility with vimgolf binary
-  post '/entry.json' => 'solutions#update'
+  post '/api/user_setup.json'  => 'api#user_setup'
+  get  '/api/task/:token.json' => 'api#task'
+  post '/api/solution.json'    => 'api#solution'
 
   resources :tasks, except: :destroy do
     resources :solutions, only: %w(index create show update) do
