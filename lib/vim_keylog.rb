@@ -10,7 +10,7 @@ class VimKeylog
   def initialize(input)
     # Force encoding of solution text. Must match string literals.
     # .force_encoding CHANGES THE ORIGINAL STRING!
-    @input = input.force_encoding(Encoding::ASCII_8BIT)
+    @input = input.to_s.force_encoding(Encoding::ASCII_8BIT)
   end
 
   def to_s(sep = '')
