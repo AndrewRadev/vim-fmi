@@ -10,7 +10,9 @@ class VimKeylog
   def initialize(input)
     # Force encoding of solution text. Must match string literals.
     # .force_encoding CHANGES THE ORIGINAL STRING!
-    @input = input.to_s.force_encoding(Encoding::ASCII_8BIT)
+    if input
+      @input = input.force_encoding(Encoding::ASCII_8BIT)
+    end
   end
 
   def to_s(sep = '')
@@ -21,7 +23,7 @@ class VimKeylog
   alias_method :score   , :count
 
   def each
-    scanner = StringScanner.new(@input)
+    scanner = StringScanner.new(@input || '')
 
     # A Vim keycode is either a single byte, or a 3-byte sequence starting
     # with 0x80.
