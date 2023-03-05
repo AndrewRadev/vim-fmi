@@ -23,7 +23,7 @@ class Task < ApplicationRecord
 
   scope :in_numeric_order, -> { order('number DESC') }
   scope :in_chronological_order, -> { order('closes_at DESC') }
-  scope :visible, -> { in_chronological_order.where('opens_at >= ?', Time.current) }
+  scope :visible, -> { in_chronological_order.where('opens_at <= ?', Time.current) }
 
   def closed?
     closes_at.past?
