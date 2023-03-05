@@ -4,12 +4,12 @@ class SolutionsController < ApplicationController
   def index
     @task = Task.find(params[:task_id])
 
-    unless Solution.exists?(user_id: current_user.id, task_id: @task.id) or admin?
+    unless Solution.completed.exists?(user_id: current_user.id, task_id: @task.id) or admin?
       deny_access
       return
     end
 
-    @solutions = Solution.latest_for_task(params[:task_id])
+    @solutions = Solution.completed.latest_for_task(params[:task_id])
   end
 
   def show
