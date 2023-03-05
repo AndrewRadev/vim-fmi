@@ -10,7 +10,7 @@ class TasksController < ApplicationController
       Task.visible.in_numeric_order
     end
 
-    @user_tokens = current_user.user_tokens
+    @user_tokens = current_user&.user_tokens
   end
 
   def new
