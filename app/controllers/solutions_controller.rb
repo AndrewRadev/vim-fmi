@@ -37,18 +37,17 @@ class SolutionsController < ApplicationController
 
     if entry && entry.size < 2
       cheat = true
-    elsif params[:challenge_id] && !params[:apikey].empty? && !params[:apikey].nil?
+    elsif params[:challenge_id] && !params[:user_token].empty?
       cheat = false
-      solution = Solution.find_by(token: params[:challenge_id])
+      solution = Solution.incomplete.find_by(token: params[:challenge_id])
 
       if solution
-        # TODO (2023-02-14) Verify user with API key, change param names
-        # TODO (2023-02-26) Don't allow the same solution to be submitted twice
         solution.update!({
           script:       entry,
           points:       solution.task.points,
           completed_at: Time.current,
           meta:         meta_params,
+          user_token:   params[:user_token],
         })
         solution.user.update_points
       end

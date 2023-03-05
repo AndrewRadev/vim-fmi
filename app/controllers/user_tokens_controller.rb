@@ -28,8 +28,13 @@ class UserTokensController < ApplicationController
       if user_token
         user_token.update!(meta: meta, activated_at: Time.current)
         user = user_token.user
+        user_data = {
+          id:             user.id,
+          faculty_number: user.faculty_number,
+          token:          user_token.body,
+        }
 
-        format.json { render json: { id: user.id, faculty_number: user.faculty_number } }
+        format.json { render json: user_data }
       else
         format.json { render json: { status: 'failed' }, status: 400 }
       end
