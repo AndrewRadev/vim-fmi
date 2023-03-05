@@ -6,13 +6,11 @@
     <abbr title="Факултет по Математика и Информатика">ФМИ</abbr> София.
   </p>
 
-  <% admin_only do %>
-    <ul>
-      <li>RSS feed на новините: <%= link_to 'RSS', announcements_path(format: 'rss') %>.</li>
-      <li>Достъп до Discord: <%= link_to '#announcements', 'https://discord.gg/nsjmMUaaC5' %>.</li>
-      <li>Инструкции за упражненията: <%= link_to 'Guide', task_guide_path %>.</li>
-    </ul>
-  <% end %>
+  <ul>
+    <li>RSS feed на новините: <%= link_to 'RSS', announcements_path(format: 'rss') %>.</li>
+    <li>Достъп до Discord: <%= link_to '#announcements', 'https://discord.gg/nsjmMUaaC5' %>.</li>
+    <li>Инструкции за упражненията: <%= link_to 'Guide', task_guide_path %>.</li>
+  </ul>
 
   <h2>Новини</h2>
 
