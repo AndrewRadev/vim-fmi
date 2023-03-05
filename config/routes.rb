@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :announcements, except: %w(destroy)
   resources :lectures, only: :index
 
-  post '/api/user_setup.json'  => 'api#user_setup'
+  post '/api/setup.json'       => 'api#user_setup'
   get  '/api/task/:token.json' => 'api#task'
   post '/api/solution.json'    => 'api#solution'
 
