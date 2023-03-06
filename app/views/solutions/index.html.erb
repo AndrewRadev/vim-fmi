@@ -11,6 +11,7 @@
     <tr>
       <th class="name">Име</th>
       <th class="script">Решение</th>
+      <th class="timestamp">Пуснато</th>
     </tr>
   </thead>
 
@@ -22,6 +23,9 @@
         </td>
         <td class="script">
           <code><%= render 'shared/script', script: solution.script %></code>
+        </td>
+        <td class="script">
+          <%= I18n.l solution.completed_at %>
         </td>
       </tr>
     <% end %>

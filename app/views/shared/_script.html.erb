@@ -1,1 +1,1 @@
-<% VimKeylog.new(script).each do |key| %><% if key.size > 1 %><span class="special-key"><%= key %></span><% else %><%= key %><% end %><% end %>
+<% VimKeylog.new(script).each do |key| %><% if key.size > 1 %><span class="special-key"><%= key %></span><% else %><span class="normal-key"><%= key %></span><% end %><% end %>

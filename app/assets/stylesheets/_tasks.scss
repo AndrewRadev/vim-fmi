@@ -68,6 +68,11 @@ p.task-guide-notice { font-style: italic; color: $quiet; }
 .special-key {
   color: #990000;
   font-weight: bold;
+  font-family: monospace;
+}
+
+.normal-key {
+  font-family: monospace;
 }
 
 .input-output-table {
