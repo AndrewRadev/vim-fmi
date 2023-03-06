@@ -26,6 +26,10 @@ class UserToken < ApplicationRecord
   scope :active, -> { visible.where.not(activated_at: nil) }
   scope :inactive, -> { visible.where(activated_at: nil) }
 
+  def solutions
+    Solution.where(user_token: body)
+  end
+
   def activate(meta)
     update!(meta: meta, activated_at: Time.current)
   end

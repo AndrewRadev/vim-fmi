@@ -38,7 +38,9 @@ class User < ApplicationRecord
   scope :students, -> { where(admin: false) }
 
   has_many :solutions
-  has_many :tasks, -> { distinct }, through: :solutions
+  has_many :completed_solutions, -> { completed }, class_name: 'Solution'
+  has_many :tasks, -> { distinct }, through: :solutions, source: :task
+  has_many :completed_tasks, -> { distinct }, through: :completed_solutions, source: :task
   has_many :vouchers
   has_many :user_tokens
 

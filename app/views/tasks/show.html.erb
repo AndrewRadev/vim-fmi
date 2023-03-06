@@ -1,5 +1,5 @@
 <div class="task">
-  <h1><%= @task.label %></h1>
+  <h1><%= '✅ ' if @task.completed_by?(current_user) %><%= @task.label %></h1>
 
   <p>
     <%= admin_only do %>

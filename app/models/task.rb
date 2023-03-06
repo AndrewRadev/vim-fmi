@@ -25,6 +25,12 @@ class Task < ApplicationRecord
   scope :in_chronological_order, -> { order('closes_at DESC') }
   scope :visible, -> { in_chronological_order.where('opens_at <= ?', Time.current) }
 
+  def completed_by?(user)
+    return false if user.blank?
+
+    solutions.completed.exists?(user_id: user.id)
+  end
+
   def closed?
     closes_at.past?
   end

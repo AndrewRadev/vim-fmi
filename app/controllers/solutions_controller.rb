@@ -4,7 +4,7 @@ class SolutionsController < ApplicationController
   def index
     @task = Task.find(params[:task_id])
 
-    unless Solution.completed.exists?(user_id: current_user.id, task_id: @task.id) or admin?
+    unless @task.completed_by?(current_user) or admin?
       deny_access
       return
     end
