@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post '/api/solution.json'    => 'api#solution'
 
   resources :tasks, except: :destroy do
-    resources :solutions, only: %w(index create show update) do
+    resources :solutions, only: %w(index create show update destroy) do
       get :unscored, on: :collection
     end
     resource :my_solution, only: %w(show)

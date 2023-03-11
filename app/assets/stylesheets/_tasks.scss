@@ -4,6 +4,10 @@
 
   dl dt { display: block; float: left; font-weight: bold; width: 100px; }
   dl dd { clear: right; margin: 5px 0; }
+
+  code.solution-token {
+    padding: 8px 16px;
+  }
 }
 
 table.solutions {
@@ -69,10 +73,12 @@ p.task-guide-notice { font-style: italic; color: $quiet; }
   color: #990000;
   font-weight: bold;
   font-family: monospace;
+  white-space: pre;
 }
 
 .normal-key {
   font-family: monospace;
+  white-space: pre;
 }
 
 .input-output-table {

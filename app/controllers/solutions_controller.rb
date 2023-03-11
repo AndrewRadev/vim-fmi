@@ -30,4 +30,12 @@ class SolutionsController < ApplicationController
 
     redirect_to task
   end
+
+  def destroy
+    task = Task.find(params[:task_id])
+    solution = task.solutions.incomplete.find(params[:id])
+    solution.destroy!
+
+    redirect_to task
+  end
 end
