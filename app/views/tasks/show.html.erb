@@ -41,7 +41,7 @@
 
   <p>
     <% if @task.description? %>
-      <p><%= @task.description %></p>
+      <p><%=markup @task.description %></p>
     <% end %>
 
     <table class="input-output-table">

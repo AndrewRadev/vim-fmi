@@ -2,6 +2,7 @@ bg:
   time:
     formats:
       default: "%d.%m.%Y %H:%M"
+      with_weekday: "%A, %d.%m.%Y %H:%M"
   errors:
     messages:
       blank: задължително поле

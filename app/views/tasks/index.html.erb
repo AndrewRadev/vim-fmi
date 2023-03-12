@@ -42,7 +42,9 @@
             <% end %>
           </td>
           <td class="name"><%= link_to task.label, task %></td>
-          <td class="closes_at"><%= l task.closes_at %></td>
+          <td class="closes_at">
+            <%= I18n.l(task.closes_at, format: :with_weekday).capitalize %>
+          </td>
         </tr>
       <% end %>
     </tbody>

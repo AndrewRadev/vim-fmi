@@ -39,12 +39,7 @@ table.solutions {
 
     td.solved { width: 52px; }
     td.name { @include link-table-cell(10px 15px); }
-    td.closes_at { width: 20%; min-width: 160px; }
-  }
-
-  @include mobile-only {
-    .closes_at { display: none; }
-    th.name { border-top-right-radius: 5px; }
+    td.closes_at { width: 270px; }
   }
 }
 
