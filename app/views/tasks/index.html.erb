@@ -37,7 +37,7 @@
       <% @tasks.each do |task| %>
         <tr class="<%= task_row_class(task) %>">
           <td class="solved">
-            <% if logged_in? && task.solutions.exists?(user_id: current_user.id) %>
+            <% if logged_in? && task.completed_by?(current_user) %>
               ✅
             <% end %>
           </td>
