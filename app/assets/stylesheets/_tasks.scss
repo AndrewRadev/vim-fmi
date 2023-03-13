@@ -38,7 +38,10 @@ table.solutions {
     @include data-table;
 
     td.solved { width: 52px; }
-    td.name { @include link-table-cell(10px 15px); }
+    td.name {
+      @include link-table-cell(10px 15px);
+      word-break: break-all;
+    }
     td.closes_at { width: 270px; }
   }
 }
@@ -69,11 +72,13 @@ p.task-guide-notice { font-style: italic; color: $quiet; }
   font-weight: bold;
   font-family: monospace;
   white-space: pre;
+  font-size: 80%;
 }
 
 .normal-key {
   font-family: monospace;
   white-space: pre;
+  font-size: 80%;
 }
 
 .input-output-table {
