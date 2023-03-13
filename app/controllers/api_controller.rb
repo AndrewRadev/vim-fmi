@@ -23,6 +23,11 @@ class ApiController < ApplicationController
     solution = Solution.incomplete.find_by!(token: params.require(:token))
     task = solution.task
 
+    if task.closed?
+      render json: { status: 'failed' }, status: 400
+      return
+    end
+
     render json: {
       input:   task.input,
       output:  task.output,
