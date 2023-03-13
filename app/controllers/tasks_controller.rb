@@ -11,6 +11,11 @@ class TasksController < ApplicationController
     end
 
     @user_tokens = current_user&.user_tokens
+
+    respond_to do |format|
+      format.html
+      format.rss { response.headers['Content-Type'] = 'application/rss+xml; charset=utf-8' }
+    end
   end
 
   def new
