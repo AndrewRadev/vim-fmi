@@ -21,6 +21,8 @@
 class Task < ApplicationRecord
   has_many :solutions
 
+  validates :opens_at, :closes_at, presence: true
+
   scope :in_numeric_order, -> { order('number DESC') }
   scope :in_chronological_order, -> { order('closes_at DESC') }
   scope :visible, -> { in_chronological_order.where('opens_at <= ?', Time.current) }
