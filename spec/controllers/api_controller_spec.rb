@@ -58,6 +58,16 @@ describe ApiController do
       expect(response.status).to eq 400
       expect(json_response).to have_key(:message)
     end
+
+    it "returns an error for a closed task" do
+      task = create :task, closes_at: 1.day.ago
+      solution = create :solution, task: task
+
+      get :task, params: { token: solution.token }
+
+      expect(response.status).to eq 400
+      expect(json_response).to have_key(:message)
+    end
   end
 
   describe "PUT solution.json" do

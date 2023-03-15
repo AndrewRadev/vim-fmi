@@ -40,7 +40,7 @@ class ApiController < ApplicationController
 
     task = solution.task
     if task.closed?
-      render_error("Задачата е била затворена на #{task.closed_at.iso8601}")
+      render_error("Задачата е била затворена на #{task.closes_at.iso8601}")
       return
     end
 
