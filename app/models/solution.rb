@@ -46,28 +46,25 @@ class Solution < ApplicationRecord
   scope :completed, -> { where.not(completed_at: nil) }
   scope :in_chronological_order, -> { order('updated_at DESC') }
 
-  def self.latest_for_task(task_id)
-    latest_scope = where(task_id: task_id).
-      select('DISTINCT ON (user_id) solutions.id').
-      order('user_id, solutions.created_at DESC')
+  def self.for_task(task_id, order_type: nil)
+    latest_scope = where(task_id: task_id).select('DISTINCT ON (user_id) solutions.id')
 
-    where(id: latest_scope).order('created_at DESC')
-  end
+    case order_type
+    when 'key-count'
+      latest_scope = latest_scope.order(Arel.sql('user_id, array_length(solutions.script_keys, 1) ASC'))
+    when 'time-spent'
+      latest_scope = latest_scope.order(Arel.sql('user_id, completed_at - created_at ASC'))
+    else
+      latest_scope = latest_scope.order(Arel.sql('user_id, completed_at DESC'))
+    end
 
-  def self.fewest_keys_for_task(task_id)
-    latest_scope = where(task_id: task_id).
-      select('DISTINCT ON (user_id) solutions.id').
-      order(Arel.sql('user_id, array_length(solutions.script_keys, 1) ASC'))
+    solutions = where(id: latest_scope)
 
-    where(id: latest_scope).order(Arel.sql('array_length(solutions.script_keys, 1) ASC'))
-  end
-
-  def self.quickest_for_task(task_id)
-    latest_scope = where(task_id: task_id).
-      select('DISTINCT ON (user_id) solutions.id').
-      order(Arel.sql('user_id, completed_at - created_at ASC'))
-
-    where(id: latest_scope).order(Arel.sql('completed_at - created_at ASC'))
+    case order_type
+    when 'key-count' then solutions.order(Arel.sql('array_length(solutions.script_keys, 1) ASC'))
+    when 'time-spent' then solutions.order(Arel.sql('completed_at - created_at ASC'))
+    else solutions.order('completed_at DESC')
+    end
   end
 
   def user_from_token
