@@ -66,7 +66,7 @@
       <ul>
         <% @completed_solutions.each do |solution| %>
           <li>
-            <code><%= render 'shared/script', script: solution.script %></code>
+            <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
             <% admin_only do %>
               <ul>
                 <% user_from_token = solution.user_from_token %>

@@ -1,3 +1,5 @@
+require 'vim_keylog'
+
 # == Schema Information
 #
 # Table name: solutions
@@ -7,6 +9,7 @@
 #  meta         :json             not null
 #  points       :integer          default(0), not null
 #  script       :binary
+#  script_keys  :string           is an Array
 #  token        :string           not null
 #  user_token   :string
 #  created_at   :datetime         not null
@@ -21,9 +24,23 @@
 #  index_solutions_on_user_id  (user_id)
 #
 class Solution < ApplicationRecord
+  COMPACTED_KEYS = Set.new([
+    '<Left>', '<Right>', '<Up>', '<Down>',
+    '<BS>', '<Del>',
+    '<ScrollWheelUp>', '<ScrollWheelDown>',
+  ]).freeze
+  ARROWS = Set.new(['<Left>', '<Right>', '<Up>', '<Down>']).freeze
+  MOUSE = Set.new([
+    '<LeftMouse>', '<LeftRelease>', '<LeftDrag>',
+    '<RightMouse>', '<RightRelease>', '<RightDrag>',
+    '<ScrollWheelUp>', '<ScrollWheelDown>',
+  ]).freeze
+
   belongs_to :task
   belongs_to :user
   validates :token, presence: true, uniqueness: true
+
+  before_save :update_script_keys
 
   scope :incomplete, -> { where(completed_at: nil) }
   scope :completed, -> { where.not(completed_at: nil) }
@@ -60,5 +77,46 @@ class Solution < ApplicationRecord
     return false if user.nil?
 
     task.closed? or user.admin? or self.user == user
+  end
+
+  def compact_script_keys
+    sequence = []
+    result_keys = []
+
+    script_keys.each do |key|
+      if sequence.empty? || sequence.last == key
+        sequence << key
+      else
+        if sequence.size > 1 && COMPACTED_KEYS.include?(sequence.last)
+          result_keys << "[#{ sequence.size }x#{ sequence.last }]"
+        else
+          result_keys += sequence
+        end
+
+        sequence = [key]
+      end
+    end
+
+    if sequence.size > 1 && COMPACTED_KEYS.include?(sequence.last)
+      result_keys << "[#{ sequence.size }x#{ sequence.first }]"
+    elsif sequence.size == 1
+      result_keys += sequence
+    end
+
+    result_keys
+  end
+
+  def warnings
+    script_keys.map do |key|
+      if ARROWS.include?(key)
+        '🏹'
+      elsif MOUSE.include?(key)
+        '🐁'
+      end
+    end.compact.uniq
+  end
+
+  def update_script_keys
+    self.script_keys = VimKeylog.new(self.script).to_a
   end
 end

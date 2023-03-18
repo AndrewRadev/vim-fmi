@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_05_111212) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_18_211714) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_111212) do
     t.datetime "updated_at", null: false
     t.datetime "completed_at"
     t.string "user_token"
+    t.string "script_keys", array: true
     t.index ["task_id"], name: "index_solutions_on_task_id"
     t.index ["token"], name: "index_solutions_on_token", unique: true
     t.index ["user_id"], name: "index_solutions_on_user_id"

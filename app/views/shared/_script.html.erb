@@ -1,1 +1,1 @@
-<% VimKeylog.new(script).each do |key| %><% if key.size > 1 %><span class="special-key"><%= key %></span><% else %><span class="normal-key"><%= key %></span><% end %><% end %>
+<% script_keys.each do |key| %><% if key.size > 1 && key.starts_with?('[') %><span class="sequence-key"><%= key %></span><% elsif key.size > 1 %><span class="special-key"><%= key %></span><% else %><span class="normal-key"><%= key %></span><% end %><% end %>

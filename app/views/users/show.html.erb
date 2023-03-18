@@ -59,7 +59,7 @@
             <%= user_token.label %>: <pre><%= user_token.meta %></pre>
             <ul>
               <% user_token.solutions.each do |solution| %>
-                <li><%= solution.task.label %>: <%= render 'shared/script', script: solution.script %></li>
+                <li><%= solution.task.label %>: <%= render 'shared/script', script_keys: solution.compact_script_keys %></li>
               <% end %>
             </ul>
           </li>

@@ -10,7 +10,9 @@
   <thead>
     <tr>
       <th class="name">Име</th>
+      <th class="warnings">:/</th>
       <th class="script">Решение</th>
+      <th class="key-count">#</th>
       <th class="timestamp">Пуснато</th>
     </tr>
   </thead>
@@ -21,10 +23,27 @@
         <td class="name">
           <%= link_to solution.user_name, solution.user %>
         </td>
-        <td class="script">
-          <code><%= render 'shared/script', script: solution.script %></code>
+        <td class="warnings">
+          <% solution.warnings.each do |warning| %>
+            <% case warning %>
+            <% when '🐁' %>
+              <span title="Използвана е мишка, упражнявай позициониране с клавиатурни команди">
+                <%= warning %>
+              </span>
+            <% when '🏹' %>
+              <span title="Използвани са стрелкички, вместо тях ползвай hjkl или по-таргетирани движения">
+                <%= warning %>
+              </span>
+            <% end %>
+          <% end %>
         </td>
         <td class="script">
+          <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
+        </td>
+        <td class="key-count">
+          <%= solution.script_keys.count %>
+        </td>
+        <td class="timestamp">
           <%= I18n.l solution.completed_at %>
         </td>
       </tr>

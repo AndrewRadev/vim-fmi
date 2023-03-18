@@ -13,7 +13,13 @@
 table.solutions {
   @include data-table;
 
+  td {
+    vertical-align: top;
+  }
+
   td.name { @include link-table-cell(10px 15px); }
+  td.script { word-break: break-all; }
+  td.timestamp { white-space: nowrap; }
 
   .points { width: 150px; white-space: nowrap; }
   .results { width: 180px; white-space: nowrap; }
@@ -69,6 +75,14 @@ p.task-guide-notice { font-style: italic; color: $quiet; }
 
 .special-key {
   color: #990000;
+  font-weight: bold;
+  font-family: monospace;
+  white-space: pre;
+  font-size: 80%;
+}
+
+.sequence-key {
+  color: #997700;
   font-weight: bold;
   font-family: monospace;
   white-space: pre;
