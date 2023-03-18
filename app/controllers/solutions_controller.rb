@@ -9,7 +9,16 @@ class SolutionsController < ApplicationController
       return
     end
 
-    @solutions = Solution.completed.latest_for_task(params[:task_id])
+    @solutions = Solution.completed
+
+    case params[:order]
+    when 'key-count'
+      @solutions = @solutions.fewest_keys_for_task(params[:task_id])
+    when 'time-spent'
+      @solutions = @solutions.quickest_for_task(params[:task_id])
+    else
+      @solutions = @solutions.latest_for_task(params[:task_id])
+    end
   end
 
   def show

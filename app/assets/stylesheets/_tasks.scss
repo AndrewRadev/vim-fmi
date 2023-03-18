@@ -13,9 +13,8 @@
 table.solutions {
   @include data-table;
 
-  td {
-    vertical-align: top;
-  }
+  th { white-space: nowrap; }
+  td { vertical-align: top; }
 
   td.name { @include link-table-cell(10px 15px); }
   td.script { word-break: break-all; }
@@ -35,6 +34,11 @@ table.solutions {
   .point { @include replace-with-image('icons/emoticon_grin.png', 16px, 16px); display: inline-block; }
   .bonus-point { @include replace-with-image('icons/star.png', 16px, 16px); display: inline-block; }
   .penalty-point { @include replace-with-image('icons/stop.png', 16px, 16px); display: inline-block; }
+
+  .sort-link {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 #tasks {

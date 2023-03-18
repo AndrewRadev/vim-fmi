@@ -12,8 +12,9 @@
       <th class="name">Име</th>
       <th class="warnings">:/</th>
       <th class="script">Решение</th>
-      <th class="key-count">#</th>
-      <th class="timestamp">Пуснато</th>
+      <th class="key-count"># <%= link_to '▼', url_for(order: 'key-count'), class: 'sort-link' %></th>
+      <th class="timestamp">Пуснато <%= link_to '▼', url_for(order: nil), class: 'sort-link' %></th>
+      <th class="time-spent">Време <%= link_to '▼', url_for(order: 'time-spent'), class: 'sort-link' %></th>
     </tr>
   </thead>
 
@@ -45,6 +46,9 @@
         </td>
         <td class="timestamp">
           <%= I18n.l solution.completed_at %>
+        </td>
+        <td class="time-spent">
+          <%= (solution.completed_at - solution.created_at).round(2) %>s
         </td>
       </tr>
     <% end %>

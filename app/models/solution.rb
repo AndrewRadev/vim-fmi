@@ -54,6 +54,22 @@ class Solution < ApplicationRecord
     where(id: latest_scope).order('created_at DESC')
   end
 
+  def self.fewest_keys_for_task(task_id)
+    latest_scope = where(task_id: task_id).
+      select('DISTINCT ON (user_id) solutions.id').
+      order(Arel.sql('user_id, array_length(solutions.script_keys, 1) ASC'))
+
+    where(id: latest_scope).order(Arel.sql('array_length(solutions.script_keys, 1) ASC'))
+  end
+
+  def self.quickest_for_task(task_id)
+    latest_scope = where(task_id: task_id).
+      select('DISTINCT ON (user_id) solutions.id').
+      order(Arel.sql('user_id, completed_at - created_at ASC'))
+
+    where(id: latest_scope).order(Arel.sql('completed_at - created_at ASC'))
+  end
+
   def user_from_token
     UserToken.find_by(body: user_token)&.user
   end
