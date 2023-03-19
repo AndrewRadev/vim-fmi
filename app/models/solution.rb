@@ -112,7 +112,7 @@ class Solution < ApplicationRecord
 
     if sequence.size > 1 && COMPACTED_KEYS.include?(sequence.last)
       result_keys << "[#{ sequence.size }x#{ sequence.first }]"
-    elsif sequence.size == 1
+    else
       result_keys += sequence
     end
 

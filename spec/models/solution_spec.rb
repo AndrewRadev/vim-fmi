@@ -56,6 +56,9 @@ describe Solution do
 
     solution.update_column(:script_keys, ['<Left>', '<Left>', '<Right>', '<Left>', '<Left>'])
     expect(solution.compact_script_keys.join('')).to eq '[2x<Left>]<Right>[2x<Left>]'
+
+    solution.update_column(:script_keys, ['w', 'Z', 'Z'])
+    expect(solution.compact_script_keys.join('')).to eq 'wZZ'
   end
 
   it "shows warnings for mouse usage and arrows" do
