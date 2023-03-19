@@ -96,14 +96,6 @@
                 <%= (solution.completed_at - solution.created_at).round(2) %>s
               </td>
             </tr>
-
-            <% admin_only do %>
-              <tr>
-                <% user_from_token = solution.user_from_token %>
-                <td colspan="1">User from token: <%= user_from_token.present? ? link_to(user_from_token.full_name, user_from_token) : 'N/A' %></td>
-                <td colspan="4">Meta: <code><%= solution.meta.to_json %></code></td>
-              </tr>
-            <% end %>
           <% end %>
         </tbody>
       </table>
