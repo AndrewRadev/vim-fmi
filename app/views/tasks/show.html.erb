@@ -23,7 +23,7 @@
     <% end %>
   </p>
 
-  <% if admin? or @task.closed? %>
+  <% if admin? or @task.closed? or @task.completed_by?(current_user) %>
     <p><%= link_to 'Други решения', task_solutions_path(@task) %></p>
   <% end %>
 
