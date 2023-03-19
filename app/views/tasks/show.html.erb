@@ -1,4 +1,4 @@
-<div class="task">
+<div class="task-page">
   <h1><%= '✅ ' if @task.completed_by?(current_user) %><%= @task.label %></h1>
 
   <p>
@@ -32,6 +32,9 @@
   <% end %>
 
   <dl>
+    <dt>Начало:</dt>
+    <dd><%= l @task.opens_at %></dd>
+
     <dt>Краен срок:</dt>
     <dd><%= l @task.closes_at %></dd>
 
@@ -63,20 +66,47 @@
     <p>
       <h3>Твоите решения</h3>
 
-      <ul>
-        <% @completed_solutions.each do |solution| %>
-          <li>
-            <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
+      <table class="solutions">
+        <thead>
+          <tr>
+            <th class="warnings">:/</th>
+            <th class="script">Решение</th>
+            <th class="key-count">#</th>
+            <th class="timestamp">Пуснато</th>
+            <th class="time-spent">Време</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @completed_solutions.each do |solution| %>
+            <tr>
+              <td class="warnings">
+                <%= render 'solutions/warnings', solution: solution %>
+              </td>
+              <td class="script">
+                <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
+              </td>
+              <td class="key-count">
+                <%= solution.script_keys.count %>
+              </td>
+              <td class="timestamp">
+                <%= I18n.l solution.completed_at %>
+              </td>
+              <td class="time-spent">
+                <%= (solution.completed_at - solution.created_at).round(2) %>s
+              </td>
+            </tr>
+
             <% admin_only do %>
-              <ul>
+              <tr>
                 <% user_from_token = solution.user_from_token %>
-                <li>User from token: <%= user_from_token.present? ? link_to(user_from_token.full_name, user_from_token) : 'N/A' %></li>
-                <li>Meta: <code><%= solution.meta.to_json %></code></li>
-              </ul>
+                <td colspan="1">User from token: <%= user_from_token.present? ? link_to(user_from_token.full_name, user_from_token) : 'N/A' %></td>
+                <td colspan="4">Meta: <code><%= solution.meta.to_json %></code></td>
+              </tr>
             <% end %>
-          </li>
-        <% end %>
-      </ul>
+          <% end %>
+        </tbody>
+      </table>
     </p>
   <% end %>
 </div>

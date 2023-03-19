@@ -28,6 +28,7 @@
     <thead>
       <tr>
         <th class="solved"></th>
+        <th class="count">Решения</th>
         <th class="name">Име</th>
         <th class="closes_at">Краен срок</th>
       </tr>
@@ -41,6 +42,7 @@
               ✅
             <% end %>
           </td>
+          <td class="count"><%= task.completed_users.count %></td>
           <td class="name"><%= link_to task.label, task %></td>
           <td class="closes_at">
             <%= I18n.l(task.closes_at, format: :with_weekday).capitalize %>

@@ -1,4 +1,4 @@
-.task {
+.task-page {
   @include content;
   p.closed { font-weight: bold; }
 
@@ -48,6 +48,7 @@ table.solutions {
     @include data-table;
 
     td.solved { width: 52px; }
+    td.count { width: 52px; }
     td.name {
       @include link-table-cell(10px 15px);
       word-break: break-all;

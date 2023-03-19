@@ -20,6 +20,8 @@
 #
 class Task < ApplicationRecord
   has_many :solutions
+  has_many :completed_solutions, -> { completed }, class_name: 'Solution'
+  has_many :completed_users, -> { distinct }, through: :completed_solutions, source: :user
 
   validates :opens_at, :closes_at, presence: true
 
