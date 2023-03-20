@@ -61,9 +61,13 @@ class Solution < ApplicationRecord
     solutions = where(id: latest_scope)
 
     case order_type
-    when 'key-count' then solutions.order(Arel.sql('array_length(solutions.script_keys, 1) ASC'))
-    when 'time-spent' then solutions.order(Arel.sql('completed_at - created_at ASC'))
-    else solutions.order('completed_at DESC')
+    when 'key-count'
+      order = 'array_length(solutions.script_keys, 1) ASC, completed_at ASC'
+      solutions.order(Arel.sql(order))
+    when 'time-spent'
+      solutions.order(Arel.sql('completed_at - created_at ASC'))
+    else
+      solutions.order('completed_at DESC')
     end
   end
 

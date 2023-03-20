@@ -35,6 +35,18 @@ describe Solution do
     expect(Solution.for_task(task.id, order_type: 'time-spent')).to eq [solution2, solution1]
   end
 
+  it "sorts solutions with the same script keys by the first-completed one" do
+    task = create :task
+
+    user1 = create :user
+    user2 = create :user
+
+    solution1 = create :solution, task: task, user: user1, completed_at: 10.minutes.ago, script: 'abcd'
+    solution2 = create :solution, task: task, user: user2, completed_at: 11.minutes.ago, script: 'abcd'
+
+    expect(Solution.for_task(task.id, order_type: 'key-count')).to eq [solution2, solution1]
+  end
+
   it "converts binary Vim key logs to readable keys" do
     encoded_key_log = 'aUZvb4BrbIBrbIBrbEJhcg0bgP1hgP1gWlqA/WA6cSEN'
     solution = create :solution, script: Base64.decode64(encoded_key_log)
