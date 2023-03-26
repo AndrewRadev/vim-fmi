@@ -48,7 +48,7 @@ class ApiController < ApplicationController
       input:          task.input,
       output:         task.output,
       file_extension: task.file_extension,
-      version:        '0.1.15',
+      version:        '0.1.16',
     }
   end
 
