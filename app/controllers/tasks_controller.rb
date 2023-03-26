@@ -69,6 +69,7 @@ class TasksController < ApplicationController
     params.require(:task).permit(
       :number,
       :opens_at, :closes_at,
+      :filetype, :file_extension,
       :input, :output,
       :description, :points,
     )

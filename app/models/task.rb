@@ -2,16 +2,18 @@
 #
 # Table name: tasks
 #
-#  id          :bigint           not null, primary key
-#  closes_at   :datetime
-#  description :text
-#  input       :text             not null
-#  number      :integer          not null
-#  opens_at    :datetime
-#  output      :text             not null
-#  points      :integer          default(1), not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id             :bigint           not null, primary key
+#  closes_at      :datetime
+#  description    :text
+#  file_extension :string
+#  filetype       :string
+#  input          :text             not null
+#  number         :integer          not null
+#  opens_at       :datetime
+#  output         :text             not null
+#  points         :integer          default(1), not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 # Indexes
 #

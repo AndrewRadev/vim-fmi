@@ -45,9 +45,10 @@ class ApiController < ApplicationController
     end
 
     render json: {
-      input:   task.input,
-      output:  task.output,
-      version: '0.2.0',
+      input:          task.input,
+      output:         task.output,
+      file_extension: task.file_extension,
+      version:        '0.1.15',
     }
   end
 

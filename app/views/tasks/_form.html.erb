@@ -7,6 +7,11 @@
   </div>
 
   <div class="flex-row flex-align-center gap-8">
+    <%= form.input :filetype, input_html: { cols: 50 } %>
+    <%= form.input :file_extension, input_html: { cols: 50 } %>
+  </div>
+
+  <div class="flex-row flex-align-center gap-8">
     <%= form.input :input, input_html: { cols: 50 } %>
     <%= form.input :output, input_html: { cols: 50 } %>
   </div>
@@ -15,4 +20,3 @@
   <%= form.input :points %>
   <%= form.submit %>
 <% end %>
-

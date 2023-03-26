@@ -106,6 +106,7 @@ bg:
         output: Изход
         opens_at: Начало
         closes_at: Край
+        file_extension: Разширение на файла
         points: Точки
       solution:
         adjustment: Корекция
