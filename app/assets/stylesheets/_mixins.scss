@@ -67,6 +67,7 @@
 @mixin monospace {
   font-family: $font-monospace;
   font-size: $font-monospace-size;
+  font-variant-ligatures: none;
 }
 
 @mixin heading-1 { color: $title-color; font-family: $font-headings; font-size: $font-huge; line-height: $font-huge * 1.2; }

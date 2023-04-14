@@ -12,7 +12,7 @@
   ul > li > ul > li { list-style: square; }
   ol > li { list-style: decimal; }
 
-  pre { font-family: $font-monospace; font-size: $font-monospace-size; }
+  pre { font-family: $font-monospace; font-size: $font-monospace-size; font-variant-ligatures: none; }
   pre > code { display: block; overflow-x: auto; }
 
   code {
@@ -22,6 +22,7 @@
     border: 1px solid darken(white, 20%);
     font-family: $font-monospace;
     font-size: $font-monospace-size;
+    font-variant-ligatures: none;
     padding: 1px 2px;
 
     .copy-button {
