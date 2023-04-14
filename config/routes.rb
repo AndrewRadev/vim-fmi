@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resource :team, only: :show
 
   resource :dashboard, only: :show
-  resource :profile, only: %w(edit update)
+  resource :profile, only: %w(edit update) do
+    resource :vimrc, only: %w(edit update)
+  end
 
   resources :user_tokens, only: %w(index new create edit update destroy)
 

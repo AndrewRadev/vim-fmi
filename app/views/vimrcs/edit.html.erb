@@ -1,0 +1,17 @@
+<div id="vimrc">
+  <h1>Редакция на vimrc</h1>
+
+  <%= simple_form_for @vimrc_revision, url: profile_vimrc_path, method: :put do |form| %>
+    <%= form.input :body %>
+    <%= form.button :submit, 'Запази' %>
+  <% end %>
+
+  <% existing_vimrc = @vimrc.formatted_body %>
+
+  <% if existing_vimrc.present? %>
+    <p>
+      <h2>Текущо vimrc:</h2>
+      <%= render 'shared/formatted_code', code: existing_vimrc %>
+    </p>
+  <% end %>
+</div>

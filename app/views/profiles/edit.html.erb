@@ -4,6 +4,10 @@
   <%= link_to 'Вижте публичния си профил &rarr;'.html_safe, user_path(current_user) %>
 </p>
 
+<p>
+  <%= link_to 'Редактирайте vimrc-то си &rarr;'.html_safe, edit_profile_vimrc_path %>
+</p>
+
 <%= simple_form_for @user, url: profile_path, html: {method: :put, multipart: true} do |form| %>
   <fieldset>
     <legend>Снимка</legend>

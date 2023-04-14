@@ -43,6 +43,7 @@ class User < ApplicationRecord
   has_many :completed_tasks, -> { distinct }, through: :completed_solutions, source: :task
   has_many :vouchers
   has_many :user_tokens
+  has_one :vimrc
 
   mount_uploader :photo, PhotoUploader
 
