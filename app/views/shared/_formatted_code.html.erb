@@ -1,0 +1,10 @@
+<div class="code">
+  <% code.lines.each do |line| %>
+    <div class="line" data-line-number="<%= line.line_number %>">
+      <div class="code-line highlighter <%= line.html_class %>">
+        <span class="line-numbers" data-line-number="<%= line.line_number %>"></span>
+        <span class="pre highlight"><%= line.html %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

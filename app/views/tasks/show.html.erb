@@ -57,8 +57,8 @@
       </tr>
 
       <tr>
-        <td><%= render 'shared/code', code: @task.input %></td>
-        <td><%= render 'shared/code', code: @task.output %></td>
+        <td><%= render 'shared/formatted_code', code: @task.formatted_input %></td>
+        <td><%= render 'shared/formatted_code', code: @task.formatted_output %></td>
       </tr>
     </table>
   </p>

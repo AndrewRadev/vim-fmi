@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'markup'
 
 describe Markup do
   def format(input)

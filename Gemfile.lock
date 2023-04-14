@@ -198,6 +198,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rouge (4.1.0)
     rspec-core (3.12.0)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.2)
@@ -268,6 +269,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  diff-lcs
   factory_bot_rails
   jsbundling-rails
   letter_opener
@@ -278,6 +280,7 @@ DEPENDENCIES
   rails-i18n
   rails_autolink
   rdiscount
+  rouge
   rspec-rails
   sanitize
   sassc-rails

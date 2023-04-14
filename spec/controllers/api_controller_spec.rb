@@ -31,17 +31,25 @@ describe ApiController do
   end
 
   describe "GET task.json" do
-    it "fetches an incomplete task by its solution token" do
+    it "fetches an incomplete task with no filetype by its solution token" do
       solution = create :solution
       task = solution.task
 
       get :task, params: { token: solution.token }
-
       expect(json_response).to eq({
         input: task.input,
         output: task.output,
-        version: '0.2.0',
+        version: '0.1.16',
+        file_extension: nil,
       })
+    end
+
+    it "fetches an incomplete task with a filetype" do
+      task = create :task, file_extension: 'rb'
+      solution = create :solution, task: task
+
+      get :task, params: { token: solution.token }
+      expect(json_response.fetch(:file_extension)).to eq 'rb'
     end
 
     it "returns an error for a missing or completed solution" do

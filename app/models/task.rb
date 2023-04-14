@@ -48,4 +48,12 @@ class Task < ApplicationRecord
   def label
     "Упражнение #{"%03d" % number}"
   end
+
+  def formatted_input
+    @formatted_input ||= FormattedCode::Code.new(input, filetype, [])
+  end
+
+  def formatted_output
+    @formatted_output ||= FormattedCode::Code.new(output, filetype, [])
+  end
 end

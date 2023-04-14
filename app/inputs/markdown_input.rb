@@ -1,5 +1,3 @@
-require 'markup'
-
 class MarkdownInput < SimpleForm::Inputs::TextInput
   def input(wrapper_options)
     content = @builder.object.send(attribute_name) || ''

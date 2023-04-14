@@ -1,5 +1,3 @@
-require 'markup'
-
 module ApplicationHelper
   def current_path
     URI.parse(request.url).path

@@ -1,5 +1,3 @@
-require 'vim_keylog'
-
 class TasksController < ApplicationController
   before_action :require_admin, except: %w(index show)
 
