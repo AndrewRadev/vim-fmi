@@ -15,4 +15,11 @@
 class VimrcRevision < ApplicationRecord
   belongs_to :vimrc
   has_many :solutions
+
+  validates :body, presence: true
+
+  def formatted_body
+    return nil if !body?
+    FormattedCode::Code.new(body, 'vim', [])
+  end
 end

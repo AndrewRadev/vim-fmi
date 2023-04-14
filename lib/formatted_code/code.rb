@@ -1,5 +1,12 @@
 module FormattedCode
   class Code
+    include Comparable
+
+    # For easier specs
+    def <=>(other)
+      lines.map(&:html) <=> other.lines.map(&:html)
+    end
+
     def initialize(code, language, inline_comments)
       @highlighter = Highlighter.new(code, language)
       @inline_comments = inline_comments

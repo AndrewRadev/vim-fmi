@@ -122,6 +122,8 @@ bg:
       user_token:
         label: Етикет
         body: Съдържание
+      vimrc_revision:
+        body: Съдържание
     errors:
       models:
         attribution:
