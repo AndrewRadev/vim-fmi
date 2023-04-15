@@ -16,7 +16,7 @@ class VimrcRevision < ApplicationRecord
   belongs_to :vimrc
   has_many :solutions
 
-  validates :body, presence: true
+  validates :body, presence: true, allow_blank: true
 
   def formatted_body
     return nil if !body?

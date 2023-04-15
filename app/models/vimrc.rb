@@ -15,9 +15,15 @@ class Vimrc < ApplicationRecord
   belongs_to :user
   has_many :revisions, class_name: 'VimrcRevision'
 
-  delegate :body, :formatted_body, to: :last_revision, allow_nil: true
-
   def last_revision
     revisions.order(:id).last
+  end
+
+  def body
+    last_revision&.body.presence
+  end
+
+  def formatted_body
+    last_revision&.formatted_body.presence
   end
 end
