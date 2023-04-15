@@ -84,6 +84,20 @@ class ApiController < ApplicationController
     render json: { message: "OK" }
   end
 
+  def vimrc
+    token_body = params.require(:token)
+    user_token = UserToken.active.find_by(body: token_body)
+
+    if user_token.blank?
+      render_error("Този токен (#{token_body}) не съществува или не е бил активиран")
+      return
+    end
+
+    render json: {
+      body: user_token.user.vimrc&.body,
+    }
+  end
+
   private
 
   def render_error(message)

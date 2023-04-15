@@ -78,6 +78,40 @@ describe ApiController do
     end
   end
 
+  describe "GET vimrc.json" do
+    it "fetches a user's vimrc" do
+      user_token = create :user_token, :activated
+      user = user_token.user
+      vimrc = create :vimrc, user: user
+      create :vimrc_revision, vimrc: vimrc, body: '" Custom vimrc'
+
+      get :vimrc, params: { token: user_token.body }
+
+      expect(response.status).to eq 200
+      expect(json_response).to eq({ body: '" Custom vimrc' })
+    end
+
+    it "returns nil for a missing vimrc" do
+      user_token = create :user_token, :activated
+      user = user_token.user
+
+      get :vimrc, params: { token: user_token.body }
+
+      expect(response.status).to eq 200
+      expect(json_response).to eq({ body: nil })
+    end
+
+    it "returns an error for a missing or inactive token" do
+      inactive_user_token = create :user_token
+
+      get :vimrc, params: { token: inactive_user_token.body }
+      expect(response.status).to eq 400
+
+      get :vimrc, params: { token: 'nonexistent' }
+      expect(response.status).to eq 400
+    end
+  end
+
   describe "PUT solution.json" do
     it "updates an incomplete solution by its token" do
       solution = create :solution

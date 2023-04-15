@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   post '/api/setup.json'       => 'api#user_setup'
   get  '/api/task/:token.json' => 'api#task'
   post '/api/solution.json'    => 'api#solution'
+  get '/api/vimrc/:token.json' => 'api#vimrc'
 
   resources :tasks, except: :destroy do
     resources :solutions, only: %w(index create show update destroy) do
