@@ -4,18 +4,19 @@ require 'vim_keylog'
 #
 # Table name: solutions
 #
-#  id           :bigint           not null, primary key
-#  completed_at :datetime
-#  meta         :json             not null
-#  points       :integer          default(0), not null
-#  script       :binary
-#  script_keys  :string           is an Array
-#  token        :string           not null
-#  user_token   :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  task_id      :bigint           not null
-#  user_id      :bigint           not null
+#  id                :bigint           not null, primary key
+#  completed_at      :datetime
+#  meta              :json             not null
+#  points            :integer          default(0), not null
+#  script            :binary
+#  script_keys       :string           is an Array
+#  token             :string           not null
+#  user_token        :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  task_id           :bigint           not null
+#  user_id           :bigint           not null
+#  vimrc_revision_id :bigint
 #
 # Indexes
 #
@@ -38,6 +39,7 @@ class Solution < ApplicationRecord
 
   belongs_to :task
   belongs_to :user
+  belongs_to :vimrc_revision, optional: true
   validates :token, presence: true, uniqueness: true
 
   before_save :update_script_keys

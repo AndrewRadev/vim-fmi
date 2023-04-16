@@ -83,12 +83,12 @@ describe ApiController do
       user_token = create :user_token, :activated
       user = user_token.user
       vimrc = create :vimrc, user: user
-      create :vimrc_revision, vimrc: vimrc, body: '" Custom vimrc'
+      revision = create :vimrc_revision, vimrc: vimrc, body: '" Custom vimrc'
 
       get :vimrc, params: { token: user_token.body }
 
       expect(response.status).to eq 200
-      expect(json_response).to eq({ body: '" Custom vimrc' })
+      expect(json_response).to eq({ body: '" Custom vimrc', revision_id: revision.id })
     end
 
     it "returns nil for a missing vimrc" do
@@ -98,7 +98,7 @@ describe ApiController do
       get :vimrc, params: { token: user_token.body }
 
       expect(response.status).to eq 200
-      expect(json_response).to eq({ body: nil })
+      expect(json_response).to eq({ body: nil, revision_id: nil })
     end
 
     it "returns an error for a missing or inactive token" do
@@ -115,11 +115,34 @@ describe ApiController do
   describe "PUT solution.json" do
     it "updates an incomplete solution by its token" do
       solution = create :solution
+      expect(solution).not_to be_completed_at
 
       params = { challenge_id: solution.token, entry: Base64.encode64('solution'), user_token: 'anything' }
       put :solution, params: params
+      solution.reload
 
       expect(response.status).to eq 200
+      expect(solution).to be_completed_at
+      expect(solution.vimrc_revision_id).to be_nil
+    end
+
+    it "sets a solution's vimrc_revision" do
+      revision = create :vimrc_revision
+      solution = create :solution
+      expect(solution).not_to be_completed_at
+
+      params = {
+        challenge_id:      solution.token,
+        entry:             Base64.encode64('solution'),
+        user_token:        'anything',
+        vimrc_revision_id: revision.id,
+      }
+      put :solution, params: params
+      solution.reload
+
+      expect(response.status).to eq 200
+      expect(solution).to be_completed_at
+      expect(solution.vimrc_revision).to eq revision
     end
 
     it "returns an error for a missing or completed solution" do

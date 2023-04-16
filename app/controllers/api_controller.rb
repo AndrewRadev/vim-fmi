@@ -55,6 +55,7 @@ class ApiController < ApplicationController
   def solution
     entry = Base64.decode64(params.require(:entry) || '')
     token = params.require(:challenge_id)
+    vimrc_revision_id = params[:vimrc_revision_id].presence&.to_i
 
     solution = Solution.incomplete.find_by(token: token)
     if solution.nil?
@@ -68,11 +69,12 @@ class ApiController < ApplicationController
     end
 
     solution_updates = {
-      script:       entry,
-      points:       solution.task.points,
-      completed_at: Time.current,
-      meta:         meta_params,
-      user_token:   params[:user_token],
+      script:            entry,
+      points:            solution.task.points,
+      completed_at:      Time.current,
+      meta:              meta_params,
+      user_token:        params[:user_token],
+      vimrc_revision_id: vimrc_revision_id,
     }
 
     if !solution.update(solution_updates)
@@ -93,8 +95,11 @@ class ApiController < ApplicationController
       return
     end
 
+    vimrc = user_token.user.vimrc
+
     render json: {
-      body: user_token.user.vimrc&.body,
+      revision_id: vimrc&.last_revision&.id,
+      body: vimrc&.body,
     }
   end
 
