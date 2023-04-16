@@ -5,13 +5,38 @@
   <p><%= link_to "Към профила на #{@solution.user_name}", @solution.user %></p>
 
   <h2>Код</h2>
-  <code><%= render 'shared/script', script_keys: @solution.compact_script_keys %></code>
+  <code><%= render 'shared/script', script_keys: @solution.script_keys %></code>
 
-  <%# if @solution.commentable_by? current_user %>
-    <%# simple_form_for [@solution, Comment.new] do |form| %>
-      <%# render 'comments/form', form: form %>
-    <%# end %>
-  <%# end %>
+  <h3>Информация</h3>
+  <dl>
+    <dt>Брой клавиши:</dt>
+    <dd><%= @solution.script_keys.count %></dd>
+
+    <dt>Създаден токен:</dt>
+    <dd><%= I18n.l @solution.created_at %></dd>
+
+    <dt>Завършено решение:</dt>
+    <dd><%= I18n.l @solution.completed_at %></dd>
+
+    <dt>Време (от токен):</dt>
+    <dd>
+      <%= (@solution.completed_at - @solution.created_at).round(2) %>s
+    </dd>
+
+    <dt>Време (във Vim):</dt>
+    <dd>
+      <% if @solution.meta['time'] %>
+        <%= (@solution.meta['time'].to_i / 1000.0).round(2) %>s
+      <% else %>
+        N/A
+      <% end %>
+    </dd>
+
+    <dt>Предупреждения:</dt>
+    <dd>
+      <%= render 'solutions/warnings', solution: @solution %>
+    </dd>
+  </dl>
 
   <% if @other_solutions.count > 0 %>
     <p>
@@ -20,10 +45,18 @@
       <ul>
         <% @other_solutions.each do |solution| %>
           <li>
+            <%= link_to '[виж]', task_solution_path(@task, solution) %>
             <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
           </li>
         <% end %>
       </ul>
+    </p>
+  <% end %>
+
+  <% if @solution.vimrc_revision.present? %>
+    <p>
+      <h3>Vimrc</h3>
+      <%= render 'shared/formatted_code', code: @solution.vimrc_revision.formatted_body %>
     </p>
   <% end %>
 </div>

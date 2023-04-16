@@ -13,8 +13,9 @@ class SolutionsController < ApplicationController
   end
 
   def show
-    @solution = Solution.find(params[:id])
-    @other_solutions = @solution.user.solutions.where.not(id: @solution.id).where(task_id: @solution.task_id)
+    @task = Task.find(params[:task_id])
+    @solution = @task.solutions.find(params[:id])
+    @other_solutions = @solution.user.solutions.where.not(id: @solution.id).where(task_id: @task.id)
 
     deny_access unless @solution.visible_to?(current_user)
   end

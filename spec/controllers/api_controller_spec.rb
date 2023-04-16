@@ -135,7 +135,7 @@ describe ApiController do
         challenge_id:      solution.token,
         entry:             Base64.encode64('solution'),
         user_token:        'anything',
-        vimrc_revision_id: revision.id,
+        vimrc_revision_id: revision.id.to_s,
       }
       put :solution, params: params
       solution.reload

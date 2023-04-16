@@ -60,7 +60,8 @@ table.solutions {
 .solution {
   @include content;
 
-  .results { @include test-results; }
+  dl dt { display: block; float: left; font-weight: bold; width: 200px; }
+  dl dd { clear: right; margin: 5px 0; }
 
   article.revision { border: 1px solid $light-border; border-radius: 4px; padding: 2em; margin: 2em 0; }
   article.revision h3 { margin: 0 0 2em; }
