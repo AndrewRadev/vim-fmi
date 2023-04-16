@@ -5,11 +5,11 @@
     <%= link_to "Всички ревизии", user_vimrc_revisions_path(current_user) %>
   </p>
 
-  <% if @incomplete_tasks.exists? %>
+  <% if @incomplete_tasks.size > 0 %>
     <h3>Недовършени упражнения</h3>
 
     <p>
-      Поне едно решение е нужно, за да се редактира свободно vimrc-то
+      Поне едно решение е нужно, за да се редактира vimrc-то
     </p>
 
     <ul>
@@ -19,9 +19,13 @@
     </ul>
   <% end %>
 
+  <% form_disabled = @incomplete_tasks.size > 0 %>
+
   <%= simple_form_for @vimrc_revision, url: profile_vimrc_path, method: :put do |form| %>
-    <%= form.input :body %>
-    <%= form.button :submit, 'Запази' %>
+    <%= form.input :body, disabled: form_disabled %>
+    <% if !form_disabled %>
+      <%= form.button :submit, 'Запази' %>
+    <% end %>
   <% end %>
 
   <% existing_vimrc = @vimrc.formatted_body %>
