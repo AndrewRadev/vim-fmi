@@ -1,0 +1,15 @@
+<div id="vimrc">
+  <h1>Съдържание на vimrc</h1>
+
+  <p>
+    Създадено <%= I18n.l @vimrc_revision.created_at %>
+  </p>
+
+  <p>
+    <%= link_to "Всички ревизии на #{@user.name}", user_vimrc_revisions_path %>
+  </p>
+
+  <% if @vimrc_revision.formatted_diff %>
+    <%= render 'shared/formatted_code', code: @vimrc_revision.formatted_diff %>
+  <% end %>
+</div>

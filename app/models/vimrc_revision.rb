@@ -18,8 +18,28 @@ class VimrcRevision < ApplicationRecord
 
   validates :body, presence: true, allow_blank: true
 
+  scope :in_chronological_order, -> { order('created_at DESC') }
+
   def formatted_body
     return nil if !body?
     FormattedCode::Code.new(body, 'vim', [])
+  end
+
+  def previous_revision
+    vimrc.revisions.order(:id).where('id < ?', id).last
+  end
+
+  def diff_stats
+    previous = previous_revision
+    return nil if !previous
+
+    FormattedCode::Diff.new(previous.body, body, 'vim', []).stats
+  end
+
+  def formatted_diff
+    previous = previous_revision
+    return nil if !previous
+
+    FormattedCode::Diff.new(previous.body, body, 'vim', [])
   end
 end

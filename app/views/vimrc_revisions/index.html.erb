@@ -1,0 +1,16 @@
+<div id="vimrc">
+  <h1>Ревизии на vimrc</h1>
+
+  <ul>
+    <% @user.vimrc_revisions.in_chronological_order.each do |revision| %>
+      <% added, removed = revision.diff_stats %>
+      <% label = "Ревизия от #{I18n.l revision.created_at}" %>
+      <li>
+        <%= link_to label, user_vimrc_revision_path(@user, revision) %>
+        <% if added && removed %>
+          <code>+<%= added %>/-<%= removed %></code>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

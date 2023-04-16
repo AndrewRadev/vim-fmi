@@ -7,6 +7,20 @@ module FormattedCode
       @inline_comments = inline_comments
     end
 
+    def stats
+      added = 0
+      removed = 0
+
+      @diff.flat_map do |change|
+        case change.action
+        when '+' then added += 1
+        when '-' then removed += 1
+        end
+      end
+
+      [added, removed]
+    end
+
     def lines
       @diff.flat_map do |change|
         comments_for_line = @inline_comments.fetch(change.new_position, [])

@@ -13,7 +13,15 @@
           предаде
         <% end %>
 
-        <%= link_to "решение на упражнение #{"%03d" % activity.task_number}", task_solution_path(activity.secondary_id, activity.target_id) %>
+        <% case activity.kind %>
+        <% when :comment, :solution %>
+          <% label = "решение на упражнение #{"%03d" % activity.task_number}" %>
+          <% url = task_solution_path(activity.secondary_id, activity.target_id) %>
+          <%= link_to label, url %>
+        <% when :vimrc_revision %>
+          промени vimrc-то си:
+          <%= link_to "ново състояние", user_vimrc_revision_path(activity.user_id, activity.target_id)  %>
+        <% end %>
 
         <time datetime="<%= activity.happened_at.iso8601 %>">
           <%= l activity.happened_at.in_time_zone(Time.zone) %>

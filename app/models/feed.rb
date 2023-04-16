@@ -57,6 +57,18 @@ class Feed
         FROM solutions
           LEFT JOIN users ON solutions.user_id = users.id
           LEFT JOIN tasks ON solutions.task_id = tasks.id
+      ) UNION (
+        SELECT
+          'vimrc_revision'           AS kind,
+          users.id                   AS user_id,
+          users.name                 AS user_name,
+          vimrc_revisions.id         AS target_id,
+          vimrc_revisions.vimrc_id   AS secondary_id,
+          0                          AS task_number,
+          vimrc_revisions.created_at AS happened_at
+        FROM vimrc_revisions
+          LEFT JOIN vimrcs ON vimrc_revisions.vimrc_id = vimrcs.id
+          LEFT JOIN users ON vimrcs.user_id = users.id
       )
       ORDER BY happened_at DESC
     SQL

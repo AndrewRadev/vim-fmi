@@ -44,6 +44,7 @@ class User < ApplicationRecord
   has_many :vouchers
   has_many :user_tokens
   has_one :vimrc
+  has_many :vimrc_revisions, through: :vimrc, source: :revisions
 
   mount_uploader :photo, PhotoUploader
 
