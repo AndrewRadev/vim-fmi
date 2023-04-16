@@ -23,13 +23,19 @@
 class Task < ApplicationRecord
   has_many :solutions
   has_many :completed_solutions, -> { completed }, class_name: 'Solution'
-  has_many :completed_users, -> { distinct }, through: :completed_solutions, source: :user
+  has_many :completed_users,     -> { distinct }, through: :completed_solutions, source: :user
 
   validates :opens_at, :closes_at, presence: true
 
-  scope :in_numeric_order, -> { order('number DESC') }
+  scope :open,    -> { where('opens_at <= :now AND closes_at > :now', now: Time.current) }
+  scope :visible, -> { where('opens_at <= ?', Time.current).in_chronological_order }
+
+  scope :in_numeric_order,       -> { order('number DESC') }
   scope :in_chronological_order, -> { order('closes_at DESC') }
-  scope :visible, -> { in_chronological_order.where('opens_at <= ?', Time.current) }
+
+  def self.not_completed_by(user)
+    open.where.not(id: user.completed_tasks)
+  end
 
   def completed_by?(user)
     return false if user.blank?

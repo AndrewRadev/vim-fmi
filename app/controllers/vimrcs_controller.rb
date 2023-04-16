@@ -4,13 +4,17 @@ class VimrcsController < ApplicationController
   def edit
     @vimrc = current_user.vimrc || Vimrc.new
     @vimrc_revision = @vimrc.revisions.last || @vimrc.revisions.new
+    @incomplete_tasks = Task.not_completed_by(current_user)
   end
 
   def update
     @vimrc = current_user.vimrc || current_user.build_vimrc
     @vimrc_revision = @vimrc.revisions.new(vimrc_revision_params)
 
-    if @vimrc_revision.save
+    if !@vimrc.editable_by?(current_user)
+      flash[:error] = 'Vimrc-то е заключено, има отворени задачи'
+      redirect_to action: :edit
+    elsif @vimrc_revision.save
       flash[:notice] = 'Vimrc-то е обновено успешно'
       redirect_to action: :edit
     else

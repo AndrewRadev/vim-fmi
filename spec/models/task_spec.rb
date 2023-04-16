@@ -17,6 +17,22 @@ describe Task do
     end
   end
 
+  it "is open if its #opens_at is due and its #closes_at is not passed" do
+    Timecop.freeze do
+      task1 = create :task, opens_at: 1.day.ago, closes_at: 1.day.from_now
+      task2 = create :task, opens_at: 2.days.from_now, closes_at: 3.days.from_now
+      task3 = create :task, opens_at: 3.days.from_now, closes_at: 4.days.from_now
+
+      expect(Task.open).to eq [task1]
+
+      Timecop.travel(2.5.days.from_now)
+      expect(Task.open).to eq [task2]
+
+      Timecop.travel(1.day.from_now)
+      expect(Task.open).to eq [task3]
+    end
+  end
+
   describe "#completed_by?" do
     it "checks if the given user has completed the task" do
       task = create :task

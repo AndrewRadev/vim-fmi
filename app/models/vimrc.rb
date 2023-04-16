@@ -15,6 +15,13 @@ class Vimrc < ApplicationRecord
   belongs_to :user
   has_many :revisions, class_name: 'VimrcRevision'
 
+  def editable_by?(editor)
+    return false if !editor.admin? && editor != user
+    return false if Task.not_completed_by(user).exists?
+
+    true
+  end
+
   def last_revision
     revisions.order(:id).last
   end

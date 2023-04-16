@@ -1,6 +1,24 @@
 <div id="vimrc">
   <h1>Редакция на vimrc</h1>
 
+  <p>
+    <%= link_to "Всички ревизии", user_vimrc_revisions_path(current_user) %>
+  </p>
+
+  <% if @incomplete_tasks.exists? %>
+    <h3>Недовършени упражнения</h3>
+
+    <p>
+      Поне едно решение е нужно, за да се редактира свободно vimrc-то
+    </p>
+
+    <ul>
+      <% @incomplete_tasks.each do |task| %>
+        <li><%= link_to task.label, task %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <%= simple_form_for @vimrc_revision, url: profile_vimrc_path, method: :put do |form| %>
     <%= form.input :body %>
     <%= form.button :submit, 'Запази' %>
