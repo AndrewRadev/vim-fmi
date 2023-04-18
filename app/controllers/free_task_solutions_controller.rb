@@ -16,7 +16,7 @@ class FreeTaskSolutionsController < ApplicationController
   def show
     @free_task = FreeTask.find(params[:free_task_id])
     @free_task_solution = @free_task.solutions.find(params[:id])
-    @other_solutions = @free_task_solution.user.solutions.
+    @other_solutions = @free_task_solution.user.free_task_solutions.
       where.not(id: @free_task_solution.id).
       where(free_task_id: @free_task.id)
 

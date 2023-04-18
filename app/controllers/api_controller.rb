@@ -2,6 +2,8 @@ class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   skip_before_action :set_sentry_user
 
+  CLIENT_VERSION = '0.1.18'
+
   def user_setup
     token_body = params.require(:token)
     user_token = UserToken.inactive.find_by(body: token_body)
@@ -48,7 +50,29 @@ class ApiController < ApplicationController
       input:          task.input,
       output:         task.output,
       file_extension: task.file_extension,
-      version:        '0.1.16',
+      version:        CLIENT_VERSION,
+    }
+  end
+
+  def free_task
+    token = params.require(:token)
+    solution = FreeTaskSolution.find_by(token: token)
+    if solution.nil?
+      render_error("Токена за упражнението (#{token}) не съществува")
+      return
+    end
+
+    free_task = solution.free_task
+    if free_task.hidden?
+      render_error("Задачата е била скрита на #{task.hidden_at.iso8601}")
+      return
+    end
+
+    render json: {
+      input:          free_task.input,
+      output:         free_task.output,
+      file_extension: free_task.file_extension,
+      version:        CLIENT_VERSION,
     }
   end
 
@@ -83,6 +107,33 @@ class ApiController < ApplicationController
     end
 
     solution.user.update_points
+    render json: { message: "OK" }
+  end
+
+  def free_task_solution
+    entry = Base64.decode64(params.require(:entry) || '')
+    token = params.require(:challenge_id)
+    vimrc_revision_id = params[:vimrc_revision_id].presence&.to_i
+
+    solution = FreeTaskSolution.find_by(token: token)
+    if solution.nil?
+      render_error("Токена за упражнението (#{token}) не съществува")
+      return
+    end
+
+    solution_updates = {
+      script:            entry,
+      completed_at:      Time.current,
+      meta:              meta_params,
+      user_token:        params[:user_token],
+      vimrc_revision_id: vimrc_revision_id,
+    }
+
+    if !solution.update(solution_updates)
+      render_error("Неочаквана грешка при записване на упражнение #{token}")
+      return
+    end
+
     render json: { message: "OK" }
   end
 

@@ -21,6 +21,8 @@
 #  index_free_task_solutions_on_user_id       (user_id)
 #
 class FreeTaskSolution < ApplicationRecord
+  # TODO (2023-04-18) Extract script compaction, warnings
+
   belongs_to :free_task
   belongs_to :user
   belongs_to :vimrc_revision, optional: true
@@ -104,9 +106,9 @@ class FreeTaskSolution < ApplicationRecord
 
   def warnings
     script_keys.map do |key|
-      if ARROWS.include?(key)
+      if Solution::ARROWS.include?(key)
         '🏹'
-      elsif MOUSE.include?(key)
+      elsif Solution::MOUSE.include?(key)
         '🐁'
       end
     end.compact.uniq
