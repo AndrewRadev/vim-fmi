@@ -20,7 +20,7 @@
 #
 class FreeTask < ApplicationRecord
   belongs_to :user
-  has_many :solutions, class_name: 'FreeTaskSolution'
+  has_many :solutions, class_name: 'FreeTaskSolution', dependent: :destroy
   has_many :completed_solutions, -> { completed }, class_name: 'FreeTaskSolution'
   has_many :completed_users,     -> { distinct }, through: :completed_solutions, source: :user
 
