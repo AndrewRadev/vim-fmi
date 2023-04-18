@@ -85,7 +85,7 @@ class FreeTaskSolution < ApplicationRecord
       if sequence.empty? || sequence.last == key
         sequence << key
       else
-        if sequence.size > 1 && COMPACTED_KEYS.include?(sequence.last)
+        if sequence.size > 1 && Solution::COMPACTED_KEYS.include?(sequence.last)
           result_keys << "[#{ sequence.size }x#{ sequence.last }]"
         else
           result_keys += sequence
@@ -95,7 +95,7 @@ class FreeTaskSolution < ApplicationRecord
       end
     end
 
-    if sequence.size > 1 && COMPACTED_KEYS.include?(sequence.last)
+    if sequence.size > 1 && Solution::COMPACTED_KEYS.include?(sequence.last)
       result_keys << "[#{ sequence.size }x#{ sequence.first }]"
     else
       result_keys += sequence

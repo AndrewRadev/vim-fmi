@@ -27,6 +27,8 @@ class FreeTask < ApplicationRecord
   validates :label, presence: true, uniqueness: true
   validates :input, :output, presence: true
 
+  validate :label_does_not_match_task
+
   scope :visible, -> { where(hidden_at: nil) }
   scope :in_chronological_order, -> { order('created_at DESC') }
 
@@ -50,5 +52,13 @@ class FreeTask < ApplicationRecord
 
   def formatted_output
     @formatted_output ||= FormattedCode::Code.new(output, filetype, [])
+  end
+
+  private
+
+  def label_does_not_match_task
+    if label =~ /^\s*Упражнение\s+\d+\s*$/ && !user.admin?
+      errors.add :label, "не може да има формата 'Упражнение NNN'"
+    end
   end
 end
