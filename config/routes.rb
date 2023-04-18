@@ -34,6 +34,10 @@ Rails.application.routes.draw do
   end
 
   resources :free_tasks, except: :destroy do
+    member do
+      put :hide
+    end
+
     resources :free_task_solutions, as: :solutions, only: %w(index create show update destroy) do
       get :unscored, on: :collection
     end

@@ -1,5 +1,6 @@
 class FreeTasksController < ApplicationController
   before_action :require_user, except: %w(index show)
+  before_action :require_admin, only: %w(hide)
 
   def index
     @free_tasks = FreeTask.visible.in_chronological_order
@@ -47,10 +48,18 @@ class FreeTasksController < ApplicationController
     @free_task = FreeTask.find(params[:id])
 
     if @free_task.update(free_update_task_params)
-      redirect_to @free_task, notice: 'Задачата е обновена успешно'
+      redirect_to @free_task, notice: 'Упражнението е обновено успешно'
     else
       render :edit
     end
+  end
+
+  def hide
+    @free_task = FreeTask.find(params[:id])
+    @free_task.update!(hidden_at: Time.current)
+
+    flash[:notice] = "Упражнението е скрито"
+    redirect_to action: :index
   end
 
   private

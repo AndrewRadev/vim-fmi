@@ -95,4 +95,10 @@
       </table>
     </p>
   <% end %>
+
+  <% admin_only do %>
+    <p>
+      <%= link_to 'Скрий', hide_free_task_path(@free_task), class: 'action', method: :put %>
+    </p>
+  <% end %>
 </div>
