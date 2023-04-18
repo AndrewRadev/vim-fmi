@@ -47,7 +47,7 @@ class FreeTasksController < ApplicationController
   def update
     @free_task = FreeTask.find(params[:id])
 
-    if @free_task.update(free_update_task_params)
+    if @free_task.update(free_task_update_params)
       redirect_to @free_task, notice: 'Упражнението е обновено успешно'
     else
       render :edit

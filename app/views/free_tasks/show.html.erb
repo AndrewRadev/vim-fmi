@@ -3,7 +3,7 @@
 
   <p>
     <%= admin_only do %>
-      <%= link_to 'Редактирай', edit_task_path(@free_task), class: :action %>
+      <%= link_to 'Редактирай', edit_free_task_path(@free_task), class: :action %>
     <% end %>
 
     <%= authenticated_only do %>

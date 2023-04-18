@@ -5,8 +5,8 @@
   <%= form.input :file_extension, hint: "За filetype detection в клиентския Vim. Примерно rb, py... Ако оставите празно, файла отворен във Vim ще е с разширение txt" %>
 
   <div class="flex-row flex-align-center gap-8">
-    <%= form.input :input, input_html: { cols: 50 } %>
-    <%= form.input :output, input_html: { cols: 50 } %>
+    <%= form.input :input, input_html: { cols: 50 }, disabled: @free_task.persisted? %>
+    <%= form.input :output, input_html: { cols: 50 }, disabled: @free_task.persisted? %>
   </div>
 
   <%= form.input :description, input_html: { style: 'height: 80px;' } %>
