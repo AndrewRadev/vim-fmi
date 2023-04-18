@@ -39,7 +39,7 @@ describe ApiController do
       expect(json_response).to eq({
         input: task.input,
         output: task.output,
-        version: '0.1.16',
+        version: '0.2.0',
         file_extension: nil,
       })
     end

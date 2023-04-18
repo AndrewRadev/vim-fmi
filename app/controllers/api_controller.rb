@@ -2,7 +2,7 @@ class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   skip_before_action :set_sentry_user
 
-  CLIENT_VERSION = '0.1.18'
+  CLIENT_VERSION = '0.2.0'
 
   def user_setup
     token_body = params.require(:token)
