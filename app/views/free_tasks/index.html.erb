@@ -1,0 +1,56 @@
+<div id="tasks">
+  <h1>Свободни упражнения</h1>
+
+  <p>
+    Всеки може да пусне упражнение, но не носи никакви точки. Бъдете културни.
+  </p>
+
+  <% if logged_in? %>
+    <% if @user_tokens.active.blank? %>
+      <p>Нямаш активиран token, създай си и го активирай, за да пускаш упражнения</p>
+
+      <p>
+        <%= link_to 'Твоите токени', user_tokens_path, class: [:action, :primary] %>
+        <%= link_to 'Нов token', new_user_token_path, class: [:action, :primary] %>
+      </p>
+    <% else %>
+      <p>Имаш поне един активиран token, можеш да пускаш упражнения</p>
+
+      <p>
+        <%= link_to 'Твоите токени', user_tokens_path, class: [:action, :primary] %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <p>
+    <%= link_to 'Ново свободно упражнение', new_free_task_path, class: [:action, :primary] %>
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="solved"></th>
+        <th class="count">Решения</th>
+        <th class="name">Име</th>
+        <th class="author">Автор</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr class="<%= task_row_class(task) %>">
+          <td class="solved">
+            <% if logged_in? && task.completed_by?(current_user) %>
+              ✅
+            <% end %>
+          </td>
+          <td class="count"><%= task.completed_users.count %></td>
+          <td class="name"><%= link_to task.label, task %></td>
+          <td class="author">
+            <%= link_to task.user.name, task.user %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -41,6 +41,12 @@ class User < ApplicationRecord
   has_many :completed_solutions, -> { completed }, class_name: 'Solution'
   has_many :tasks, -> { distinct }, through: :solutions, source: :task
   has_many :completed_tasks, -> { distinct }, through: :completed_solutions, source: :task
+
+  has_many :created_free_tasks, class_name: 'FreeTask'
+  has_many :free_task_solutions
+  has_many :completed_free_task_solutions, -> { completed }, class_name: 'FreeTaskSolution'
+  has_many :completed_free_tasks, -> { distinct }, through: :completed_solutions, source: :task
+
   has_many :vouchers
   has_many :user_tokens
   has_one :vimrc

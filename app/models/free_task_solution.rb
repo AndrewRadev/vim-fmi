@@ -1,41 +1,27 @@
 # == Schema Information
 #
-# Table name: solutions
+# Table name: free_task_solutions
 #
 #  id                :bigint           not null, primary key
 #  completed_at      :datetime
 #  meta              :json             not null
-#  points            :integer          default(0), not null
 #  script            :binary
 #  script_keys       :string           is an Array
 #  token             :string           not null
 #  user_token        :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  task_id           :bigint           not null
+#  free_task_id      :bigint           not null
 #  user_id           :bigint           not null
 #  vimrc_revision_id :bigint
 #
 # Indexes
 #
-#  index_solutions_on_task_id  (task_id)
-#  index_solutions_on_token    (token) UNIQUE
-#  index_solutions_on_user_id  (user_id)
+#  index_free_task_solutions_on_free_task_id  (free_task_id)
+#  index_free_task_solutions_on_user_id       (user_id)
 #
-class Solution < ApplicationRecord
-  COMPACTED_KEYS = Set.new([
-    '<Left>', '<Right>', '<Up>', '<Down>',
-    '<BS>', '<Del>',
-    '<ScrollWheelUp>', '<ScrollWheelDown>',
-  ]).freeze
-  ARROWS = Set.new(['<Left>', '<Right>', '<Up>', '<Down>']).freeze
-  MOUSE = Set.new([
-    '<LeftMouse>', '<LeftRelease>', '<LeftDrag>',
-    '<RightMouse>', '<RightRelease>', '<RightDrag>',
-    '<ScrollWheelUp>', '<ScrollWheelDown>',
-  ]).freeze
-
-  belongs_to :task
+class FreeTaskSolution < ApplicationRecord
+  belongs_to :free_task
   belongs_to :user
   belongs_to :vimrc_revision, optional: true
   validates :token, presence: true, uniqueness: true
@@ -46,8 +32,8 @@ class Solution < ApplicationRecord
   scope :completed, -> { where.not(completed_at: nil) }
   scope :in_chronological_order, -> { order('updated_at DESC') }
 
-  def self.for_task(task_id, order_type: nil)
-    latest_scope = where(task_id: task_id).select('DISTINCT ON (user_id) solutions.id')
+  def self.for_free_task(free_task_id, order_type: nil)
+    latest_scope = where(free_task_id: free_task_id).select('DISTINCT ON (user_id) solutions.id')
 
     case order_type
     when 'key-count'
@@ -80,12 +66,11 @@ class Solution < ApplicationRecord
   end
 
   def task_label
-    task.label
+    free_task.label
   end
 
   def visible_to?(user)
     return true if user&.admin?
-    return true if task.closed?
 
     self.user == user
   end

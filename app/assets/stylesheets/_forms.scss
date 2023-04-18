@@ -4,7 +4,7 @@
   legend { color: $subtitle-color; font-size: $font-large; font-weight: bold; padding: 10px 0; }
 
   label { display: block; padding: 0 0 5px 0; }
-  label abbr { display: none; }
+  // label abbr { display: none; }
 
   .boolean label { display: inline; }
 
@@ -72,4 +72,3 @@
     overflow: hidden;
   }
 }
-

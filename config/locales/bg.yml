@@ -38,6 +38,9 @@ bg:
       task:
         create: Създай
         update: Запази
+      free_task:
+        create: Създай
+        update: Запази
       attribution:
         create: Признай
         update: Запази
@@ -108,6 +111,14 @@ bg:
         closes_at: Край
         file_extension: Разширение на файла
         points: Точки
+      free_task:
+        description: Описание
+        checked: Проверена
+        hidden: Скрита
+        input: Вход
+        output: Изход
+        file_extension: Разширение на файла
+        label: Заглавие
       solution:
         adjustment: Корекция
         points: Точки

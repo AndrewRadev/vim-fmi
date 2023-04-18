@@ -31,6 +31,12 @@ Rails.application.routes.draw do
     # resource :check, controller: :task_checks, only: :create
   end
 
+  resources :free_tasks, except: :destroy do
+    resources :free_task_solutions, as: :solutions, only: %w(index create show update destroy) do
+      get :unscored, on: :collection
+    end
+  end
+
   resources :activities, only: :index
   resources :points_breakdowns, only: :index
 
@@ -39,7 +45,8 @@ Rails.application.routes.draw do
 
   resource :preview, only: :create
 
-  get 'guides/tasks', as: :task_guide
+  get 'guides/tasks',      as: :task_guide
+  get 'guides/free_tasks', as: :free_task_guide
 
   root "home#index"
 end

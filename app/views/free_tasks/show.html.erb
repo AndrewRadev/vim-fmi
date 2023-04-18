@@ -1,0 +1,98 @@
+<div class="task-page">
+  <h1><%= '✅ ' if @free_task.completed_by?(current_user) %><%= @free_task.label %></h1>
+
+  <p>
+    <%= admin_only do %>
+      <%= link_to 'Редактирай', edit_task_path(@free_task), class: :action %>
+    <% end %>
+
+    <%= authenticated_only do %>
+      <% if @incomplete_solution %>
+        Предай решение: <code class="solution-token">vim-fmi free <%= @incomplete_solution.token %></code>
+
+        <%= link_to '❌', free_task_solution_path(@free_task, @incomplete_solution), {
+          method: :delete,
+          class:  [:action],
+        } %>
+      <% else %>
+        <%= link_to 'Предай решение', free_task_solutions_path(@free_task), {
+          method: :post,
+          class:  [:action, :primary],
+        } %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <% if admin? or @free_task.completed_by?(current_user) %>
+    <p><%= link_to 'Други решения', free_task_solutions_path(@free_task) %></p>
+  <% end %>
+
+  <dl>
+    <dt>Инструкции:</dt>
+    <dd><%= link_to 'Guide', free_task_guide_path %></dd>
+  </dl>
+
+  <p>
+    <% if @free_task.description? %>
+      <p><%=markup @free_task.description %></p>
+    <% end %>
+
+    <table class="input-output-table">
+      <tr>
+        <th>Начално състояние</th>
+        <th>Крайно състояние</th>
+      </tr>
+
+      <tr>
+        <td><%= render 'shared/formatted_code', code: @free_task.formatted_input %></td>
+        <td><%= render 'shared/formatted_code', code: @free_task.formatted_output %></td>
+      </tr>
+    </table>
+  </p>
+
+  <% if @completed_solutions %>
+    <%# link_to 'Коментари към моето решение', @current_user_solution, class: [:action, :primary] %>
+
+    <p>
+      <h3>Твоите решения</h3>
+
+      <table class="solutions">
+        <thead>
+          <tr>
+            <th class="warnings">:/</th>
+            <th class="vimrc">Vimrc?</th>
+            <th class="script">Решение</th>
+            <th class="key-count">#</th>
+            <th class="timestamp">Пуснато</th>
+            <th class="time-spent">Време</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @completed_solutions.each do |solution| %>
+            <tr>
+              <td class="warnings">
+                <%= render 'solutions/warnings', solution: solution %>
+              </td>
+              <td class="vimrc">
+                <%= solution.vimrc_revision_id? ? '✅': '' %>
+              </td>
+              <td class="script">
+                <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
+              </td>
+              <td class="key-count">
+                <%= link_to solution.script_keys.count, task_solution_path(@free_task, solution) %>
+              </td>
+              <td class="timestamp">
+                <%= I18n.l solution.completed_at %>
+              </td>
+              <td class="time-spent">
+                <%= (solution.completed_at - solution.created_at).round(2) %>s
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </p>
+  <% end %>
+</div>

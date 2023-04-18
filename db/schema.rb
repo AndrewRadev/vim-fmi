@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_16_153810) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_18_110018) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_153810) do
     t.datetime "updated_at", null: false
     t.index ["solution_id"], name: "index_comments_on_solution_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "free_task_solutions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "free_task_id", null: false
+    t.bigint "vimrc_revision_id"
+    t.string "token", null: false
+    t.string "user_token"
+    t.binary "script"
+    t.string "script_keys", array: true
+    t.json "meta", default: "{}", null: false
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["free_task_id"], name: "index_free_task_solutions_on_free_task_id"
+    t.index ["user_id"], name: "index_free_task_solutions_on_user_id"
+  end
+
+  create_table "free_tasks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "label", null: false
+    t.text "description"
+    t.string "file_extension"
+    t.string "filetype"
+    t.text "input", null: false
+    t.text "output", null: false
+    t.datetime "hidden_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_free_tasks_on_user_id"
   end
 
   create_table "sign_ups", force: :cascade do |t|
