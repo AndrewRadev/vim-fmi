@@ -33,11 +33,11 @@ class FreeTaskSolution < ApplicationRecord
   scope :in_chronological_order, -> { order('updated_at DESC') }
 
   def self.for_free_task(free_task_id, order_type: nil)
-    latest_scope = where(free_task_id: free_task_id).select('DISTINCT ON (user_id) solutions.id')
+    latest_scope = where(free_task_id: free_task_id).select('DISTINCT ON (user_id) free_task_solutions.id')
 
     case order_type
     when 'key-count'
-      latest_scope = latest_scope.order(Arel.sql('user_id, array_length(solutions.script_keys, 1) ASC'))
+      latest_scope = latest_scope.order(Arel.sql('user_id, array_length(free_task_solutions.script_keys, 1) ASC'))
     when 'time-spent'
       latest_scope = latest_scope.order(Arel.sql('user_id, completed_at - created_at ASC'))
     else
@@ -48,7 +48,7 @@ class FreeTaskSolution < ApplicationRecord
 
     case order_type
     when 'key-count'
-      order = 'array_length(solutions.script_keys, 1) ASC, completed_at ASC'
+      order = 'array_length(free_task_solutions.script_keys, 1) ASC, completed_at ASC'
       solutions.order(Arel.sql(order))
     when 'time-spent'
       solutions.order(Arel.sql('completed_at - created_at ASC'))

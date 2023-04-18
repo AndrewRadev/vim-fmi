@@ -1,0 +1,45 @@
+<h1><%= @free_task.label %>: Последно предадени решения</h1>
+
+<p><%= link_to 'Към упражнението', @free_task, class: :back %></p>
+
+<p>
+  <strong><%= @free_task_solutions.count %></strong> решения
+</p>
+
+<table class="solutions">
+  <thead>
+    <tr>
+      <th class="name">Име</th>
+      <th class="warnings">:/</th>
+      <th class="script">Решение</th>
+      <th class="key-count"># <%= link_to '▼', url_for(order: 'key-count'), class: 'sort-link' %></th>
+      <th class="timestamp">Пуснато <%= link_to '▼', url_for(order: nil), class: 'sort-link' %></th>
+      <th class="time-spent">Време <%= link_to '▼', url_for(order: 'time-spent'), class: 'sort-link' %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @free_task_solutions.each do |solution| %>
+      <tr>
+        <td class="name">
+          <%= link_to solution.user_name, solution.user %>
+        </td>
+        <td class="warnings">
+          <%= render 'solutions/warnings', solution: solution %>
+        </td>
+        <td class="script">
+          <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
+        </td>
+        <td class="key-count">
+          <%= link_to solution.script_keys.count, task_solution_path(@free_task, solution) %>
+        </td>
+        <td class="timestamp">
+          <%= I18n.l solution.completed_at %>
+        </td>
+        <td class="time-spent">
+          <%= (solution.completed_at - solution.created_at).round(2) %>s
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

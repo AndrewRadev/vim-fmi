@@ -6,7 +6,7 @@ xml.rss 'version' => '2.0', 'xmlns:dc' => 'http://purl.org/dc/elements/1.1/', 'x
     xml.description "Упражнения от курса \"#{Rails.application.config.course_name}\""
     xml.language    'bg-BG'
 
-    @tasks.each do |task|
+    @free_tasks.each do |task|
       xml.item do
         xml.title   task.label
         xml.link    task_path(task, only_path: false)

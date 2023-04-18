@@ -10,7 +10,7 @@ class FreeTaskSolutionsController < ApplicationController
     end
 
     @free_task_solutions = FreeTaskSolution.completed.
-      for_task(params[:free_task_id], order_type: params[:order])
+      for_free_task(params[:free_task_id], order_type: params[:order])
   end
 
   def show

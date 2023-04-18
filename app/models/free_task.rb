@@ -24,7 +24,8 @@ class FreeTask < ApplicationRecord
   has_many :completed_solutions, -> { completed }, class_name: 'FreeTaskSolution'
   has_many :completed_users,     -> { distinct }, through: :completed_solutions, source: :user
 
-  validates :label, :input, :output, presence: true
+  validates :label, presence: true, uniqueness: true
+  validates :input, :output, presence: true
 
   scope :visible, -> { where(hidden_at: nil) }
   scope :in_chronological_order, -> { order('created_at DESC') }

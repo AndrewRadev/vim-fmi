@@ -37,8 +37,8 @@
     </thead>
 
     <tbody>
-      <% @tasks.each do |task| %>
-        <tr class="<%= task_row_class(task) %>">
+      <% @free_tasks.each do |task| %>
+        <tr>
           <td class="solved">
             <% if logged_in? && task.completed_by?(current_user) %>
               ✅

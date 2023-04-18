@@ -1,0 +1,62 @@
+<div class="solution">
+  <h1>Решения на <%= @free_task_solution.task_label %> от <%= @free_task_solution.user_name %></h1>
+
+  <p><%= link_to 'Обратно към всички решения', free_task_solutions_path(@free_task_solution.free_task) %></p>
+  <p><%= link_to "Към профила на #{@free_task_solution.user_name}", @free_task_solution.user %></p>
+
+  <h2>Код</h2>
+  <code><%= render 'shared/script', script_keys: @free_task_solution.script_keys %></code>
+
+  <h3>Информация</h3>
+  <dl>
+    <dt>Брой клавиши:</dt>
+    <dd><%= @free_task_solution.script_keys.count %></dd>
+
+    <dt>Създаден токен:</dt>
+    <dd><%= I18n.l @free_task_solution.created_at %></dd>
+
+    <dt>Завършено решение:</dt>
+    <dd><%= I18n.l @free_task_solution.completed_at %></dd>
+
+    <dt>Време (от токен):</dt>
+    <dd>
+      <%= (@free_task_solution.completed_at - @free_task_solution.created_at).round(2) %>s
+    </dd>
+
+    <dt>Време (във Vim):</dt>
+    <dd>
+      <% if @free_task_solution.meta['time'] %>
+        <%= (@free_task_solution.meta['time'].to_i / 1000.0).round(2) %>s
+      <% else %>
+        N/A
+      <% end %>
+    </dd>
+
+    <dt>Предупреждения:</dt>
+    <dd>
+      <%= render 'solutions/warnings', solution: @free_task_solution %>
+    </dd>
+  </dl>
+
+  <% if @other_solutions.count > 0 %>
+    <p>
+      <h3>Други решения</h3>
+
+      <ul>
+        <% @other_solutions.each do |solution| %>
+          <li>
+            <%= link_to '[виж]', free_task_solution_path(@free_task, solution) %>
+            <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
+          </li>
+        <% end %>
+      </ul>
+    </p>
+  <% end %>
+
+  <% if @free_task_solution.vimrc_revision.present? %>
+    <p>
+      <h3>Vimrc</h3>
+      <%= render 'shared/formatted_code', code: @free_task_solution.vimrc_revision.formatted_body %>
+    </p>
+  <% end %>
+</div>
