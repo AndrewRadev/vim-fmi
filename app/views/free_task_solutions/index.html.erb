@@ -31,7 +31,7 @@
           <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
         </td>
         <td class="key-count">
-          <%= link_to solution.script_keys.count, task_solution_path(@free_task, solution) %>
+          <%= link_to solution.script_keys.count, free_task_solution_path(@free_task, solution) %>
         </td>
         <td class="timestamp">
           <%= I18n.l solution.completed_at %>
