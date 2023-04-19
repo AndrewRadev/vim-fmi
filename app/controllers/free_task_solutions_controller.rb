@@ -4,7 +4,7 @@ class FreeTaskSolutionsController < ApplicationController
   def index
     @free_task = FreeTask.find(params[:free_task_id])
 
-    unless admin? or @free_task.closed? or @free_task.completed_by?(current_user)
+    unless admin? or @free_task.completed_by?(current_user)
       deny_access
       return
     end
