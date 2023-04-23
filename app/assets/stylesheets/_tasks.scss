@@ -17,7 +17,7 @@ table.solutions {
   td { vertical-align: top; }
 
   td.name { @include link-table-cell(10px 15px); }
-  td.script { word-break: break-all; }
+  td.script { word-break: break-all; font-variant-ligatures: none; }
   td.timestamp { white-space: nowrap; }
 
   .points { width: 150px; white-space: nowrap; }
