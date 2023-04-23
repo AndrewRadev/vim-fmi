@@ -73,7 +73,7 @@
         <thead>
           <tr>
             <th class="warnings">:/</th>
-            <th class="vimrc">Vimrc?</th>
+            <th class="vimrc">Vimrc</th>
             <th class="script">Решение</th>
             <th class="key-count">#</th>
             <th class="timestamp">Пуснато</th>
@@ -88,7 +88,7 @@
                 <%= render 'solutions/warnings', solution: solution %>
               </td>
               <td class="vimrc">
-                <%= solution.vimrc_revision_id? ? '✅': '' %>
+                <%= solution_vimrc_link(solution) %>
               </td>
               <td class="script">
                 <code><%= render 'shared/script', script_keys: solution.compact_script_keys %></code>
