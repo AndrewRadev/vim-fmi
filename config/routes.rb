@@ -53,6 +53,7 @@ Rails.application.routes.draw do
 
   get 'guides/tasks',      as: :task_guide
   get 'guides/free_tasks', as: :free_task_guide
+  get 'guides/projects',   as: :projects_guide
 
   root "home#index"
 end

@@ -4,4 +4,7 @@ class GuidesController < ApplicationController
 
   def free_tasks
   end
+
+  def projects
+  end
 end
