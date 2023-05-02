@@ -53,7 +53,7 @@
     </p>
   <% end %>
 
-  <% if @free_task_solution.vimrc_revision.present? %>
+  <% if @free_task_solution.vimrc_revision&.body.present? %>
     <p>
       <h3>Vimrc</h3>
       <%= render 'shared/formatted_code', code: @free_task_solution.vimrc_revision.formatted_body %>
