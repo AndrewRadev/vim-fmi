@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import Rails from '@rails/ujs';
+export const Clipboard = require("clipboard");
 
 Rails.start();
 
@@ -9,7 +10,6 @@ $(document).ready(function() {
     // TODO: Working copy buttons
     window.activateCopyButton($(this));
   });
-
   $('[data-contribution-input]').on('input', _.throttle(function() {
     const $replyBox = $(this);
     const $previewArea = $('[data-contribution-preview]');
@@ -27,6 +27,10 @@ $(document).ready(function() {
 
   var $body = $(document.body);
 
+  $(".clipboard-btn").on("click", function(){
+    Clipboard.copy($(".solution-token" ).text());
+  });
+  
   $('[data-toggle-mobile-menu]').on('click', function(event) {
     $body.toggleClass('mobile-menu-open')
     event.stopPropagation()
