@@ -31,6 +31,9 @@ gem 'sentry-ruby'
 gem 'sentry-rails'
 gem 'rouge'
 gem 'diff-lcs'
+gem 'clipboard'
+gem 'jquery-turbolinks'
+gem "ffi", :platforms => [:mswin, :mingw]
 gem 'whenever', require: false
 
 group :development, :test do
