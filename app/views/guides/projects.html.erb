@@ -219,7 +219,43 @@
   <h3>Категория: Интеграция с външно приложение</h3>
 
   <p>
-    TODO: Вероятно след лекция 9
+    Казах, че спокойно може да си напишете кода на друг език, стига да се
+    интегрира добре с Vim. Това ви дава доста свобода, но и означава, че ще
+    трябва да комуникирате между Vim и някакъв външен инструмент. Лекция 9
+    говори доста за тия неща -- <code>system</code>, <code>job_start</code>.
+    LSP интеграция също влиза в тая категория, макар аз лично да намирам такова
+    нещо за kind of скучно. Ето някои идеи с променливо количество конкретност:
+
+    <ul>
+      <li>
+        Log viewer, който чете асинхронно някакви логове и позволява
+        филтриране, търсене, syntax highlighting, или може би даже spawn-ва
+        процеси, дефинирани в Procfile като
+        <%= link_to 'foreman', 'https://github.com/ddollar/foreman' %>
+        или множеството му алтернативи
+      </li>
+      <li>Чат с други хора, чат с ботове, collaborative editing</li>
+      <li>
+        Music player като
+        <%= link_to 'ncmpcpp', 'https://wiki.archlinux.org/title/Ncmpcpp' %>,
+        който представлява UI за MPD (music player daemon) или може би извиква
+        друга външна програма за свирене на музиката
+      </li>
+      <li>
+        Клиент към съществуваща програма с някакво API като
+        <%= link_to 'spotify', 'https://github.com/HendrikPetertje/vimify' %>,
+        <%= link_to 'slack', 'https://github.com/heavenshell/vim-slack' %>,
+        <%= link_to 'twitter', 'https://github.com/twitvim/twitvim' %>
+        (макар че за последното сигурно не си заслужава да платите 100 долара
+        на месец)
+      </li>
+      <li>
+        Нещо подобно на
+        <%= link_to 'id3', 'https://github.com/AndrewRadev/id3.vim' %>,
+        <%= link_to 'gnugo', 'https://github.com/AndrewRadev/gnugo.vim' %>,
+        <%= link_to 'afterimage', 'https://github.com/tpope/vim-afterimage' %>...
+      </li>
+    </ul>
   </p>
 
   <h3>Категория: Навигация на проект</h3>
