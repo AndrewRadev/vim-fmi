@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import Rails from '@rails/ujs';
-export const Clipboard = require("clipboard");
+import Clipboard from 'clipboard';
 
 Rails.start();
 
