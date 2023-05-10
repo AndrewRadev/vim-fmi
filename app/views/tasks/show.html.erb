@@ -8,19 +8,18 @@
 
     <%= authenticated_only do %>
       <% if @incomplete_solution %>
-        
-        Предай решение: <code class="solution-token" ><%= Clipboard.copy('vim-fmi put ' + @incomplete_solution.token) %></code>
-        
-        <%= button_tag image_tag("icons/copy.png"),  {
-          class: ['clipboard-btn', :action]
+
+        Предай решение: <code class="solution-token">vim-fmi put <%= @incomplete_solution.token %></code>
+
+        <%= button_tag image_tag('icons/copy.png'), {
+          class: ['clipboard-btn', :action],
+          data: { success: image_url('icons/tick.png') },
         } %>
-        
+
         <%= link_to '❌', task_solution_path(@task, @incomplete_solution), {
           method: :delete,
           class:  [:action],
         } %>
-        
-        <% flash[:notice] = 'Командата е копирана' %>
       <% else %>
         <%= link_to 'Предай решение', task_solutions_path(@task), {
           method: :post,

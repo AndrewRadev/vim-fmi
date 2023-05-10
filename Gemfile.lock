@@ -84,7 +84,6 @@ GEM
       mini_mime (>= 0.1.3)
       ssrf_filter (~> 1.0)
     chronic (0.10.2)
-    clipboard (1.3.6)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
@@ -118,9 +117,6 @@ GEM
     io-console (0.6.0)
     irb (1.6.2)
       reline (>= 0.3.0)
-    jquery-turbolinks (2.1.0)
-      railties (>= 3.1.0)
-      turbolinks
     jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
     launchy (2.5.2)
@@ -254,9 +250,6 @@ GEM
     tilt (2.0.11)
     timecop (0.9.6)
     timeout (0.3.1)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     warden (1.2.9)
@@ -276,14 +269,11 @@ DEPENDENCIES
   annotate
   bootsnap
   carrierwave
-  clipboard
   cssbundling-rails
   debug
   devise
   diff-lcs
   factory_bot_rails
-  ffi
-  jquery-turbolinks
   jsbundling-rails
   letter_opener
   pg (~> 1.1)
