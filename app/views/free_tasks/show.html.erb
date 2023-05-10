@@ -8,7 +8,6 @@
 
     <%= authenticated_only do %>
       <% if @incomplete_solution %>
-
         Предай решение: <code class="solution-token">vim-fmi put <%= @incomplete_solution.token %></code>
 
         <%= button_tag image_tag('icons/copy.png'), {

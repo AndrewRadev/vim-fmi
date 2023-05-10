@@ -10,6 +10,7 @@ $(document).ready(function() {
     // TODO: Working copy buttons
     window.activateCopyButton($(this));
   });
+
   $('[data-contribution-input]').on('input', _.throttle(function() {
     const $replyBox = $(this);
     const $previewArea = $('[data-contribution-preview]');
