@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import Rails from '@rails/ujs';
+import Clipboard from 'clipboard';
 
 Rails.start();
 
@@ -26,6 +27,21 @@ $(document).ready(function() {
   }));
 
   var $body = $(document.body);
+
+  $(".clipboard-btn").on("click", function(event) {
+    event.preventDefault();
+
+    let $button = $(this);
+    let $token = $(".solution-token");
+
+    let copyText = $button.text();
+    let successText = $button.attr('data-success');
+
+    Clipboard.copy($token.text());
+
+    $button.html(successText);
+    setTimeout(() => $button.html(copyText), 1000);
+  });
 
   $('[data-toggle-mobile-menu]').on('click', function(event) {
     $body.toggleClass('mobile-menu-open')
