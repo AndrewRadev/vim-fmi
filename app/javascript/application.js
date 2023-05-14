@@ -28,19 +28,19 @@ $(document).ready(function() {
 
   var $body = $(document.body);
 
-  $(".clipboard-btn").on("click", function(){
+  $(".clipboard-btn").on("click", function(event) {
+    event.preventDefault();
+
     let $button = $(this);
     let $token = $(".solution-token");
 
-    let copySrc = $button.find('img').attr('src');
-    let successSrc = $button.attr('data-success');
+    let copyText = $button.text();
+    let successText = $button.attr('data-success');
 
     Clipboard.copy($token.text());
 
-    $button.find('img').attr('src', successSrc);
-    setTimeout(() => {
-      $button.find('img').attr('src', copySrc);
-    }, 1000);
+    $button.html(successText);
+    setTimeout(() => $button.html(copyText), 1000);
   });
 
   $('[data-toggle-mobile-menu]').on('click', function(event) {

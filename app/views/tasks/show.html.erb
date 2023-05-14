@@ -10,9 +10,9 @@
       <% if @incomplete_solution %>
         Предай решение: <code class="solution-token">vim-fmi put <%= @incomplete_solution.token %></code>
 
-        <%= button_tag image_tag('icons/copy.png'), {
+        <%= link_to '📋', '#', {
           class: ['clipboard-btn', :action],
-          data: { success: image_url('icons/tick.png') },
+          data: { success: '✅' },
         } %>
 
         <%= link_to '❌', task_solution_path(@task, @incomplete_solution), {
